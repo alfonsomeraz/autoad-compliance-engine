@@ -60,6 +60,9 @@ package = false
 minversion = "7.0"
 addopts = "-v --cov=app --cov-report=term-missing"
 testpaths = ["tests"]
+# Make the repo root importable (app package) regardless of where tests live —
+# the deterministic suite is in tests/, the live eval suite in evals/.
+pythonpath = ["."]
 python_files = ["test_*.py", "*_test.py"]
 # Auto mode handles async tests without explicit markers
 asyncio_mode = "auto"
