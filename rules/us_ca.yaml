@@ -1,0 +1,32 @@
+# California state advertising rules. These stack on top of the US federal
+# baseline and apply only in the US-CA jurisdiction. NOT legal advice — a
+# curated approximation to assist review.
+
+- rule_key: CA_SPECIFIC_VEHICLE_IDENTIFIER_REQUIRED
+  version: 1
+  jurisdiction: US-CA
+  severity: blocker
+  description: >
+    California requires that a specific vehicle advertised at a price be
+    identified by its license-plate or vehicle ID number (commonly satisfied
+    with the stock number or VIN).
+  applies_when:
+    claim_present: advertised_price
+  requirement:
+    claim_present: vehicle_identifier
+  remediation: "Include the vehicle's stock number or VIN in the ad."
+  source_citation: "California Vehicle Code Section 11713.1(a)"
+
+- rule_key: CA_ADVERTISED_PRICE_INCLUDES_FEES_DISCLAIMER
+  version: 1
+  jurisdiction: US-CA
+  severity: warning
+  description: >
+    A California advertised price should disclose that government fees and taxes
+    are not included in the advertised figure.
+  applies_when:
+    claim_present: advertised_price
+  requirement:
+    disclaimer_contains: "government fees"
+  remediation: "Add a disclaimer that the price excludes government fees and taxes."
+  source_citation: "California Vehicle Code Section 11713.1; CA advertising regulations"

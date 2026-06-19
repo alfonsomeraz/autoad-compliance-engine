@@ -29,11 +29,16 @@ class AdClaims(BaseModel):
     apr: Decimal | None = None
     lease_monthly_payment: Decimal | None = None
     lease_term_months: int | None = None
+    finance_monthly_payment: Decimal | None = None
+    finance_term_months: int | None = None
     due_at_signing: Decimal | None = None
     down_payment: Decimal | None = None
     total_of_payments: Decimal | None = None
     expiration_date: date | None = None
     trim_claimed: str | None = None
+    # Vehicle identification claimed in the ad (for specific-vehicle rules).
+    stock_number_claimed: str | None = None
+    vin_claimed: str | None = None
     disclaimers: list[str] = Field(default_factory=list)
 
     # Extraction self-assessment. confidence_notes is free text for the audit

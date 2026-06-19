@@ -1,0 +1,32 @@
+# OEM co-op advertising rules. Brand programs require approved offer language
+# and standard disclaimers. Modeled at the US baseline for v1 (per-OEM scoping
+# is a Phase 2 item). NOT legal advice.
+
+- rule_key: OEM_SEE_DEALER_DISCLAIMER
+  version: 1
+  jurisdiction: US
+  severity: warning
+  description: >
+    OEM co-op programs require payment/APR offers to carry a "see dealer for
+    details" style disclaimer.
+  applies_when:
+    any:
+      - claim_present: lease_monthly_payment
+      - claim_present: finance_monthly_payment
+      - claim_present: apr
+  requirement:
+    disclaimer_contains: "see dealer"
+  remediation: "Add a 'See dealer for details' disclaimer."
+  source_citation: "OEM co-op advertising guidelines (program standard)"
+
+- rule_key: OEM_OFFER_EXPIRATION_DISCLOSED
+  version: 1
+  jurisdiction: US
+  severity: warning
+  description: "OEM APR/payment offers must disclose the offer end date."
+  applies_when:
+    claim_present: apr
+  requirement:
+    claim_present: expiration_date
+  remediation: "State the OEM offer end date in the ad."
+  source_citation: "OEM co-op advertising guidelines (program standard)"

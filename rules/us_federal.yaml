@@ -77,3 +77,51 @@
     expiration_in_future: expiration_date
   remediation: "Update the offer expiration date or pull the ad."
   source_citation: "FTC Act Section 5 (deceptive advertising)"
+
+- rule_key: FINANCE_DISCLOSURE_REQUIRED
+  version: 1
+  jurisdiction: US
+  severity: blocker
+  description: >
+    If an ad advertises a finance monthly payment, it must disclose the credit
+    terms (Truth in Lending Act / Regulation Z trigger terms): APR, the repayment
+    term, and the down payment or amount due.
+  applies_when:
+    claim_present: finance_monthly_payment
+  requirement:
+    all:
+      - claim_present: apr
+      - claim_present: finance_term_months
+      - claim_present: down_payment_or_amount_due_at_signing
+  remediation: "Add APR, finance term length, and down-payment/amount-financed disclosures."
+  source_citation: "Truth in Lending Act; Regulation Z (12 CFR 1026) advertising provisions"
+
+- rule_key: APR_QUALIFIER_REQUIRED
+  version: 1
+  jurisdiction: US
+  severity: warning
+  description: >
+    An advertised APR offer should disclose that it is subject to credit approval
+    (e.g. "for well-qualified buyers").
+  applies_when:
+    claim_present: apr
+  requirement:
+    disclaimer_contains: "qualified"
+  remediation: "Add a credit-qualification qualifier such as 'for well-qualified buyers'."
+  source_citation: "Regulation Z (12 CFR 1026); FTC Act Section 5"
+
+- rule_key: EXPIRATION_REQUIRED_FOR_PAYMENT_OFFER
+  version: 1
+  jurisdiction: US
+  severity: warning
+  description: >
+    A time-limited payment offer (lease or finance monthly payment) should state
+    an expiration date so consumers know how long it is valid.
+  applies_when:
+    any:
+      - claim_present: lease_monthly_payment
+      - claim_present: finance_monthly_payment
+  requirement:
+    claim_present: expiration_date
+  remediation: "State the offer expiration date in the ad."
+  source_citation: "FTC Act Section 5 (deceptive advertising)"

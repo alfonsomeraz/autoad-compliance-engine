@@ -33,11 +33,14 @@ Rules for extraction:
   fill in plausible values. Leave a field null when the ad is silent on it.
 - advertised_price: the headline price the ad shows for the vehicle (not a
   monthly payment). Set price_type to reflect how price is presented.
-- lease_monthly_payment vs. a finance/cash price are different claims — only
-  populate lease_monthly_payment when the ad advertises a monthly LEASE payment.
+- lease_monthly_payment, finance_monthly_payment, and a cash price are different
+  claims — populate lease_monthly_payment only for a monthly LEASE payment, and
+  finance_monthly_payment only for a monthly FINANCE/loan payment.
 - Capture every fine-print / disclaimer sentence verbatim in `disclaimers`.
-- apr, lease_term_months, due_at_signing, down_payment, expiration_date,
-  trim_claimed: populate from the ad's literal text when present.
+- apr, lease_term_months, finance_term_months, due_at_signing, down_payment,
+  expiration_date, trim_claimed: populate from the ad's literal text when present.
+- stock_number_claimed / vin_claimed: the stock number or VIN if the ad names a
+  specific vehicle.
 - Set extraction_confidence between 0 and 1 (1 = certain). Lower it when the ad
   is ambiguous, low quality, or hard to parse. Use confidence_notes to explain
   anything uncertain. A shaky extraction must not look confident.

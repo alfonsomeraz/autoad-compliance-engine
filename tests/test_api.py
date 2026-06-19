@@ -33,7 +33,7 @@ def client(db_session):
     app.dependency_overrides.clear()
 
 
-def test_validate_returns_fail_with_violations(client, civic):
+def test_validate_returns_fail_with_violations(client, civic, active_ruleset):
     bad = AdClaims(lease_monthly_payment=Decimal("299.00"), trim_claimed="Touring")
     app.dependency_overrides[get_extractor] = lambda: stub(bad)
 
@@ -51,9 +51,8 @@ def test_validate_returns_fail_with_violations(client, civic):
     assert body["run_id"] > 0
 
 
-def test_validate_clean_ad_passes(client, civic):
-    good = AdClaims(advertised_price=Decimal("26200.00"), trim_claimed="Sport")
-    app.dependency_overrides[get_extractor] = lambda: stub(good)
+def test_validate_clean_ad_passes(client, civic, active_ruleset, compliant_claims):
+    app.dependency_overrides[get_extractor] = lambda: stub(compliant_claims)
 
     resp = client.post(
         "/validate",

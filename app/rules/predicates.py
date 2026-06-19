@@ -54,11 +54,15 @@ CLAIM_RESOLVERS: dict[str, Callable[[AdClaims], Any]] = {
     "apr": lambda c: c.apr,
     "lease_monthly_payment": lambda c: c.lease_monthly_payment,
     "lease_term_months": lambda c: c.lease_term_months,
+    "finance_monthly_payment": lambda c: c.finance_monthly_payment,
+    "finance_term_months": lambda c: c.finance_term_months,
     "expiration_date": lambda c: c.expiration_date,
     "down_payment_or_amount_due_at_signing": lambda c: _first(
         c.down_payment, c.due_at_signing
     ),
     "total_of_payments_or_apr": lambda c: _first(c.total_of_payments, c.apr),
+    # A specific advertised vehicle identified by stock number or VIN.
+    "vehicle_identifier": lambda c: _first(c.stock_number_claimed, c.vin_claimed),
     "lessee_responsibility_disclaimer": _lessee_disclaimer,
 }
 

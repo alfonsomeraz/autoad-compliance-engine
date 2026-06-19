@@ -7,7 +7,6 @@ The deterministic path and the audit-record writes are what we pin here.
 
 from __future__ import annotations
 
-from datetime import date, timedelta
 from decimal import Decimal
 
 import pytest
@@ -16,7 +15,6 @@ from app.llm.extraction import ExtractionResult
 from app.models.claims import AdClaims
 from app.models.enums import Verdict
 from app.models.tables import ComplianceRun
-from app.rules import sync
 from app.validation.orchestrator import validate_ad
 
 
@@ -27,22 +25,14 @@ def stub(claims: AdClaims):
     return _extract
 
 
-def test_clean_lease_ad_passes_and_writes_audit_record(db_session, civic):
-    claims = AdClaims(
-        advertised_price=Decimal("26200.00"),
-        lease_monthly_payment=Decimal("299.00"),
-        lease_term_months=36,
-        due_at_signing=Decimal("2999.00"),
-        apr=Decimal("4.90"),
-        trim_claimed="Sport",
-        expiration_date=date.today() + timedelta(days=15),
-        disclaimers=["Lessee responsible for excess wear and mileage."],
-    )
+def test_clean_lease_ad_passes_and_writes_audit_record(
+    db_session, civic, active_ruleset, compliant_claims
+):
     run = validate_ad(
         db_session,
         vehicle_id=civic.id,
         copy_text="Lease the Civic Sport for $299/mo ...",
-        extractor=stub(claims),
+        extractor=stub(compliant_claims),
     )
 
     assert run.status is Verdict.PASS
@@ -56,7 +46,7 @@ def test_clean_lease_ad_passes_and_writes_audit_record(db_session, civic):
 
 
 def test_lease_missing_disclosures_and_wrong_trim_fails_with_violations(
-    db_session, civic
+    db_session, civic, active_ruleset
 ):
     claims = AdClaims(
         lease_monthly_payment=Decimal("299.00"),
@@ -75,10 +65,11 @@ def test_lease_missing_disclosures_and_wrong_trim_fails_with_violations(
     assert "ADVERTISED_TRIM_MATCHES_SOURCE" in fired
 
 
-def test_low_confidence_extraction_routes_to_review(db_session, civic):
-    claims = AdClaims(
-        advertised_price=Decimal("26200.00"), extraction_confidence=0.2
-    )
+def test_low_confidence_extraction_routes_to_review(
+    db_session, civic, active_ruleset, compliant_claims
+):
+    # Otherwise-clean ad, but the extraction is shaky => never a confident PASS.
+    claims = compliant_claims.model_copy(update={"extraction_confidence": 0.2})
     run = validate_ad(
         db_session,
         vehicle_id=civic.id,
@@ -88,8 +79,9 @@ def test_low_confidence_extraction_routes_to_review(db_session, civic):
     assert run.status is Verdict.REQUIRES_REVIEW
 
 
-def test_run_pins_to_active_ruleset_and_links_violations(db_session, civic):
-    ruleset = sync.sync_and_activate(db_session, label="test-ruleset")
+def test_run_pins_to_active_ruleset_and_links_violations(
+    db_session, civic, active_ruleset
+):
     bad = AdClaims(lease_monthly_payment=Decimal("299.00"), trim_claimed="Touring")
     run = validate_ad(
         db_session,
@@ -98,7 +90,7 @@ def test_run_pins_to_active_ruleset_and_links_violations(db_session, civic):
         extractor=stub(bad),
     )
     assert run.status is Verdict.FAIL
-    assert run.ruleset_version_id == ruleset.id
+    assert run.ruleset_version_id == active_ruleset.id
     # Each violation links to the rule row it came from.
     assert run.violations
     assert all(v.rule_id is not None for v in run.violations)

@@ -46,6 +46,28 @@ def test_composite_claim_due_at_signing_or_down_payment():
     )
 
 
+def test_finance_monthly_payment_present():
+    c = ctx(AdClaims(finance_monthly_payment=Decimal("589")))
+    assert (
+        predicates.evaluate({"claim_present": "finance_monthly_payment"}, c) is True
+    )
+
+
+def test_vehicle_identifier_present_via_stock_number():
+    c = ctx(AdClaims(stock_number_claimed="H24001"))
+    assert predicates.evaluate({"claim_present": "vehicle_identifier"}, c) is True
+
+
+def test_vehicle_identifier_present_via_vin():
+    c = ctx(AdClaims(vin_claimed="1HGCM82633A000001"))
+    assert predicates.evaluate({"claim_present": "vehicle_identifier"}, c) is True
+
+
+def test_vehicle_identifier_absent():
+    c = ctx(AdClaims(advertised_price=Decimal("26200")))
+    assert predicates.evaluate({"claim_present": "vehicle_identifier"}, c) is False
+
+
 def test_lessee_responsibility_disclaimer_detected_by_keyword():
     c = ctx(
         AdClaims(
