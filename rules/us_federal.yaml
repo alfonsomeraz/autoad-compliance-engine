@@ -1,0 +1,79 @@
+# US federal advertising rules — the baseline that applies in every US
+# jurisdiction. Authored as data; loaded into the rule engine. Each rule cites
+# its source. NOT legal advice — a curated approximation to assist review.
+
+- rule_key: LEASE_DISCLOSURE_REQUIRED
+  version: 1
+  jurisdiction: US
+  severity: blocker
+  description: >
+    If an ad advertises a monthly lease payment, it must disclose the required
+    lease terms (Consumer Leasing Act / Regulation M trigger terms).
+  applies_when:
+    claim_present: lease_monthly_payment
+  requirement:
+    all:
+      - claim_present: down_payment_or_amount_due_at_signing
+      - claim_present: lease_term_months
+      - claim_present: total_of_payments_or_apr
+      - claim_present: lessee_responsibility_disclaimer
+  remediation: >
+    Add due-at-signing amount, lease term length, total-of-payments or APR, and
+    lessee-responsibility language to the disclosure.
+  source_citation: "Consumer Leasing Act; Regulation M (12 CFR 1013) advertising provisions"
+
+- rule_key: ADVERTISED_PRICE_MATCHES_SOURCE
+  version: 1
+  jurisdiction: US
+  severity: blocker
+  description: "The advertised price must match the authoritative vehicle/offer price."
+  applies_when:
+    claim_present: advertised_price
+  requirement:
+    claim_equals_source:
+      claim: advertised_price
+      source: offer.effective_price
+      tolerance: 0
+  remediation: "Correct the advertised figure to match the source offer, or update the offer."
+  source_citation: "FTC Act Section 5 (deceptive pricing)"
+
+- rule_key: ADVERTISED_TRIM_MATCHES_SOURCE
+  version: 1
+  jurisdiction: US
+  severity: blocker
+  description: "The advertised trim must match the actual vehicle's trim."
+  applies_when:
+    claim_present: advertised_trim
+  requirement:
+    claim_equals_source:
+      claim: advertised_trim
+      source: vehicle.trim
+  remediation: "Advertise the actual trim of the vehicle in inventory."
+  source_citation: "FTC Act Section 5 (deceptive advertising / bait pricing)"
+
+- rule_key: ADVERTISED_APR_MATCHES_SOURCE
+  version: 1
+  jurisdiction: US
+  severity: blocker
+  description: "An advertised APR must match the authoritative offer's APR."
+  applies_when:
+    claim_present: apr
+  requirement:
+    claim_equals_source:
+      claim: apr
+      source: offer.apr
+      tolerance: 0
+  remediation: "Correct the advertised APR to match the source offer."
+  source_citation: "Truth in Lending Act; Regulation Z (12 CFR 1026); FTC Act Section 5"
+
+- rule_key: OFFER_NOT_EXPIRED
+  version: 1
+  jurisdiction: US
+  severity: warning
+  description: "If an ad states an expiration date, the offer should not already be expired."
+  applies_when:
+    claim_present: expiration_date
+  requirement:
+    expiration_in_future: expiration_date
+  remediation: "Update the offer expiration date or pull the ad."
+  source_citation: "FTC Act Section 5 (deceptive advertising)"

@@ -1,0 +1,121 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "autoad-compliance-engine"
+version = "0.1.0"
+description = "Production-grade AI pipeline for validating and generating compliant automotive ads."
+requires-python = ">=3.12"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [
+    { name = "Your Name", email = "your.email@example.com" }
+]
+keywords = ["automotive", "compliance", "ai", "llm", "regulation"]
+
+# Core runtime dependencies
+dependencies = [
+    "fastapi>=0.109.0",
+    "uvicorn>=0.27.0",
+    "pydantic>=2.0",
+    "pydantic-ai>=0.1.0",  # structured LLM outputs, the heart of the system
+    "sqlalchemy>=2.0",
+    "psycopg2-binary>=2.9",  # postgres driver
+    "alembic>=1.13",  # database migrations
+    "python-dotenv>=1.0",
+    "httpx>=0.25",  # async http client for LLM APIs
+    "structlog>=24.1",  # structured logging with context
+    "boto3>=1.28",  # AWS SDK (for phase 4 deployment)
+    "pydantic-settings>=2.14.2",
+    "pyyaml>=6.0.3",
+]
+
+# Optional groups for development, testing, and evaluation
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "pytest-asyncio>=0.21",
+    "pytest-cov>=4.1",
+    "deepeval>=0.21",  # LLM evaluation framework (the hero of phase 2)
+    "black>=23.0",  # code formatting
+    "ruff>=0.1",  # linting
+    "mypy>=1.7",  # type checking
+    "ipython>=8.0",  # for interactive development
+]
+
+evals = [
+    "deepeval>=0.21",
+]
+
+# UV configuration
+[tool.uv]
+# This is an application, not a distributable library — don't build/install
+# the project itself as a package, just manage its dependencies.
+package = false
+# To pin a custom index, use `index-url = "https://..."` (default is PyPI).
+
+# Pytest configuration
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-v --cov=app --cov-report=term-missing"
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+# Auto mode handles async tests without explicit markers
+asyncio_mode = "auto"
+
+# Black code formatter
+[tool.black]
+line-length = 100
+target-version = ["py312"]
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+# Ruff linter
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+select = ["E", "F", "W", "I"]  # Errors, undefined names, warnings, import sorting
+ignore = ["E501"]  # Line too long (black handles it)
+exclude = [
+    ".git",
+    ".venv",
+    "__pycache__",
+    "build",
+    "dist",
+]
+
+[tool.ruff.isort]
+profile = "black"
+
+# MyPy type checking
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false  # Start permissive, tighten over time
+check_untyped_defs = true
+ignore_missing_imports = true
+
+# ISoRT import sorting (configured via ruff above, but can be explicit)
+[tool.isort]
+profile = "black"
+line_length = 100
+
+# Pyright / Pylance — resolve imports against the project virtualenv.
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
+pythonVersion = "3.12"
