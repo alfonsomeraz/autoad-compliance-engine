@@ -18,9 +18,9 @@ from app.llm.extraction import Extractor, llm_extractor
 from app.models.claims import SourceFacts
 from app.models.enums import AssetFormat, Channel
 from app.models.tables import AdAsset, ComplianceRun, Offer, Vehicle, Violation
-from app.rules import engine
+from app.rules import engine, sync
 from app.rules.catalog import load_catalog
-from app.rules.schema import Rule
+from app.rules.schema import RuleSpec
 
 
 def build_source_facts(vehicle: Vehicle, offer: Offer | None) -> SourceFacts:
@@ -58,7 +58,7 @@ def validate_ad(
     copy_text: str,
     channel: Channel = Channel.DISPLAY,
     extractor: Extractor = llm_extractor,
-    catalog: list[Rule] | None = None,
+    catalog: list[RuleSpec] | None = None,
 ) -> ComplianceRun:
     """Validate ad copy against the rule catalog for a given vehicle.
 
@@ -84,17 +84,30 @@ def validate_ad(
     db.add(asset)
     db.flush()
 
+    # Resolve the ruleset: an explicit catalog (tests) wins; otherwise pin to
+    # the active ruleset_version in the DB; otherwise fall back to YAML.
+    rule_id_by_key: dict[str, int] = {}
+    ruleset_version_id: int | None = None
+    if catalog is not None:
+        specs = catalog
+    else:
+        active = sync.get_active_ruleset(db)
+        if active is not None:
+            specs = [sync.rulespec_from_row(r) for r in active.rules]
+            rule_id_by_key = {r.rule_key: r.id for r in active.rules}
+            ruleset_version_id = active.id
+        else:
+            specs = load_catalog()
+
     extraction = extractor(copy_text)
     source = build_source_facts(vehicle, offer)
     result = engine.evaluate(
-        catalog if catalog is not None else load_catalog(),
-        extraction.claims,
-        source,
-        jurisdiction=jurisdiction,
+        specs, extraction.claims, source, jurisdiction=jurisdiction
     )
 
     run = ComplianceRun(
         ad_asset_id=asset.id,
+        ruleset_version_id=ruleset_version_id,
         status=result.verdict,
         extracted_claims=extraction.claims.model_dump(mode="json"),
         model_versions={"extraction": extraction.model_name},
@@ -102,6 +115,7 @@ def validate_ad(
     )
     run.violations = [
         Violation(
+            rule_id=rule_id_by_key.get(f.rule_key),
             rule_key=f.rule_key,
             severity=f.severity,
             message=f.message,

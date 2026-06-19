@@ -1,9 +1,10 @@
-"""Rule, finding, and evaluation-result types for the deterministic engine.
+"""Rule spec, finding, and evaluation-result types for the deterministic engine.
 
-A `Rule` is data (authored as YAML, loaded here). `applies_when` and
-`requirement` are predicate trees — nested dicts using the predicate vocabulary
-(see app/rules/predicates.py). The engine never executes arbitrary code; it
-interprets this restricted vocabulary.
+A `RuleSpec` is the engine's in-memory representation of a rule — data authored
+as YAML and (from Milestone 1) loaded from the `rule` DB table. `applies_when`
+and `requirement` are predicate trees: nested dicts using the predicate
+vocabulary (see app/rules/predicates.py). The engine never executes arbitrary
+code; it interprets this restricted vocabulary.
 """
 
 from __future__ import annotations
@@ -13,7 +14,7 @@ from pydantic import BaseModel, Field
 from app.models.enums import Severity, Verdict
 
 
-class Rule(BaseModel):
+class RuleSpec(BaseModel):
     rule_key: str
     version: int = 1
     jurisdiction: str = "US"

@@ -26,6 +26,7 @@ from app.models.tables import (
     Vehicle,
     Violation,
 )
+from app.rules import sync
 
 # A fixed VIN stem keeps IDs VIN-shaped (17 chars) but deterministic.
 _VIN_STEM = "1HGCM82633A0000"
@@ -143,9 +144,17 @@ def seed() -> None:
 
         session.commit()
 
+        # Sync the YAML catalog into versioned rule rows and activate a ruleset
+        # snapshot so the API pins every run to it.
+        ruleset = sync.sync_and_activate(session)
+        session.commit()
+
         n_vehicles = session.query(Vehicle).count()
         n_offers = session.query(Offer).count()
-        print(f"Seeded {n_vehicles} vehicles and {n_offers} offers for {dealer.name}.")
+        print(
+            f"Seeded {n_vehicles} vehicles and {n_offers} offers for {dealer.name}; "
+            f"activated ruleset '{ruleset.label}' with {len(ruleset.rules)} rules."
+        )
 
 
 if __name__ == "__main__":

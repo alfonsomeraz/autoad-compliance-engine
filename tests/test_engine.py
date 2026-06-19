@@ -12,9 +12,9 @@ from decimal import Decimal
 from app.models.claims import AdClaims, SourceFacts
 from app.models.enums import Severity, Verdict
 from app.rules import engine
-from app.rules.schema import Rule
+from app.rules.schema import RuleSpec
 
-PRICE_RULE = Rule(
+PRICE_RULE = RuleSpec(
     rule_key="ADVERTISED_PRICE_MATCHES_SOURCE",
     severity=Severity.BLOCKER,
     applies_when={"claim_present": "advertised_price"},
@@ -27,7 +27,7 @@ PRICE_RULE = Rule(
     },
 )
 
-EXPIRY_RULE = Rule(
+EXPIRY_RULE = RuleSpec(
     rule_key="OFFER_NOT_EXPIRED",
     severity=Severity.WARNING,
     applies_when={"claim_present": "expiration_date"},
@@ -92,7 +92,7 @@ def test_finding_carries_evidence():
 
 
 def test_jurisdiction_filter_skips_inapplicable_rules():
-    ca_rule = Rule(
+    ca_rule = RuleSpec(
         rule_key="CA_ONLY_RULE",
         jurisdiction="US-CA",
         severity=Severity.BLOCKER,

@@ -16,7 +16,7 @@ from app.models.claims import AdClaims, SourceFacts
 from app.models.enums import Severity, Verdict
 from app.rules import predicates
 from app.rules.predicates import EvalContext
-from app.rules.schema import EvaluationResult, Finding, Rule
+from app.rules.schema import EvaluationResult, Finding, RuleSpec
 
 
 def jurisdiction_applies(rule_jurisdiction: str, target: str) -> bool:
@@ -27,7 +27,7 @@ def jurisdiction_applies(rule_jurisdiction: str, target: str) -> bool:
 
 
 def evaluate(
-    rules: list[Rule],
+    rules: list[RuleSpec],
     claims: AdClaims,
     source: SourceFacts,
     jurisdiction: str = "US",

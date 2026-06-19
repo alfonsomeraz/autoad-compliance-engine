@@ -16,6 +16,7 @@ from app.llm.extraction import ExtractionResult
 from app.models.claims import AdClaims
 from app.models.enums import Verdict
 from app.models.tables import ComplianceRun
+from app.rules import sync
 from app.validation.orchestrator import validate_ad
 
 
@@ -85,6 +86,22 @@ def test_low_confidence_extraction_routes_to_review(db_session, civic):
         extractor=stub(claims),
     )
     assert run.status is Verdict.REQUIRES_REVIEW
+
+
+def test_run_pins_to_active_ruleset_and_links_violations(db_session, civic):
+    ruleset = sync.sync_and_activate(db_session, label="test-ruleset")
+    bad = AdClaims(lease_monthly_payment=Decimal("299.00"), trim_claimed="Touring")
+    run = validate_ad(
+        db_session,
+        vehicle_id=civic.id,
+        copy_text="Civic Touring $299/mo!",
+        extractor=stub(bad),
+    )
+    assert run.status is Verdict.FAIL
+    assert run.ruleset_version_id == ruleset.id
+    # Each violation links to the rule row it came from.
+    assert run.violations
+    assert all(v.rule_id is not None for v in run.violations)
 
 
 def test_unknown_vehicle_raises(db_session):

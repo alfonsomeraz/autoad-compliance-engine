@@ -12,11 +12,16 @@ from datetime import date, datetime
 from decimal import Decimal
 
 from sqlalchemy import (
+    Boolean,
+    Column,
+    Date,
     DateTime,
     ForeignKey,
     Numeric,
     String,
+    Table,
     Text,
+    UniqueConstraint,
     func,
 )
 from sqlalchemy.dialects.postgresql import JSONB
@@ -27,6 +32,7 @@ from app.models.enums import (
     AssetFormat,
     Channel,
     OfferType,
+    ReviewDecisionType,
     Severity,
     VehicleCondition,
     Verdict,
@@ -123,7 +129,10 @@ class ComplianceRun(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     ad_asset_id: Mapped[int] = mapped_column(ForeignKey("ad_asset.id"))
-    # ruleset_version_id FK added in Milestone 1 when rules become DB rows.
+    # The immutable ruleset this run was evaluated against (pins the audit).
+    ruleset_version_id: Mapped[int | None] = mapped_column(
+        ForeignKey("ruleset_version.id"), default=None
+    )
     status: Mapped[Verdict]
     extracted_claims: Mapped[dict | None] = mapped_column(JSONB, default=None)
     model_versions: Mapped[dict | None] = mapped_column(JSONB, default=None)
@@ -135,7 +144,11 @@ class ComplianceRun(Base):
     )
 
     ad_asset: Mapped[AdAsset] = relationship(back_populates="compliance_runs")
+    ruleset_version: Mapped[RulesetVersion | None] = relationship()
     violations: Mapped[list[Violation]] = relationship(
+        back_populates="compliance_run", cascade="all, delete-orphan"
+    )
+    review_decisions: Mapped[list[ReviewDecision]] = relationship(
         back_populates="compliance_run", cascade="all, delete-orphan"
     )
 
@@ -145,10 +158,85 @@ class Violation(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     compliance_run_id: Mapped[int] = mapped_column(ForeignKey("compliance_run.id"))
-    # rule_key (not a FK yet) until rules become DB rows in Milestone 1.
+    # rule_id ties to the DB rule row; rule_key is kept for readable audit.
+    rule_id: Mapped[int | None] = mapped_column(ForeignKey("rule.id"), default=None)
     rule_key: Mapped[str] = mapped_column(String(80))
     severity: Mapped[Severity]
     message: Mapped[str] = mapped_column(Text)
     evidence: Mapped[dict | None] = mapped_column(JSONB, default=None)
 
     compliance_run: Mapped[ComplianceRun] = relationship(back_populates="violations")
+
+
+# A ruleset version is an immutable snapshot of which rule rows it contains.
+ruleset_version_rule = Table(
+    "ruleset_version_rule",
+    Base.metadata,
+    Column(
+        "ruleset_version_id",
+        ForeignKey("ruleset_version.id", ondelete="CASCADE"),
+        primary_key=True,
+    ),
+    Column("rule_id", ForeignKey("rule.id"), primary_key=True),
+)
+
+
+class Rule(Base):
+    """A compliance rule as a versioned DB row. The predicate trees live in
+    JSONB so the catalog grows without redeploys; (rule_key, version) is unique
+    so prior versions stay diffable and auditable."""
+
+    __tablename__ = "rule"
+    __table_args__ = (UniqueConstraint("rule_key", "version", name="uq_rule_key_version"),)
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    rule_key: Mapped[str] = mapped_column(String(80))
+    version: Mapped[int] = mapped_column(default=1)
+    jurisdiction: Mapped[str] = mapped_column(String(16), default="US")
+    severity: Mapped[Severity]
+    description: Mapped[str] = mapped_column(Text, default="")
+    applies_when: Mapped[dict] = mapped_column(JSONB, default=dict)
+    requirement: Mapped[dict] = mapped_column(JSONB, default=dict)
+    remediation: Mapped[str] = mapped_column(Text, default="")
+    source_citation: Mapped[str] = mapped_column(Text, default="")
+    effective_from: Mapped[date | None] = mapped_column(Date, default=None)
+    effective_to: Mapped[date | None] = mapped_column(Date, default=None)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now()
+    )
+
+
+class RulesetVersion(Base):
+    """An immutable, labeled snapshot of the rules in force. A compliance_run
+    pins to one so the exact ruleset behind a verdict is always reproducible."""
+
+    __tablename__ = "ruleset_version"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    label: Mapped[str] = mapped_column(String(80), unique=True)
+    is_active: Mapped[bool] = mapped_column(Boolean, default=False)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now()
+    )
+
+    rules: Mapped[list[Rule]] = relationship(secondary=ruleset_version_rule)
+
+
+class ReviewDecision(Base):
+    """A reviewer's decision on a run that requires review. Overrides are logged
+    here, never silent — this is the human-in-the-loop audit trail."""
+
+    __tablename__ = "review_decision"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    compliance_run_id: Mapped[int] = mapped_column(ForeignKey("compliance_run.id"))
+    reviewer: Mapped[str] = mapped_column(String(120))
+    decision: Mapped[ReviewDecisionType]
+    notes: Mapped[str | None] = mapped_column(Text, default=None)
+    decided_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now()
+    )
+
+    compliance_run: Mapped[ComplianceRun] = relationship(
+        back_populates="review_decisions"
+    )
