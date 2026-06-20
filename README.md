@@ -95,6 +95,25 @@ returns `FAIL` on `ADVERTISED_TRIM_MATCHES_SOURCE` (trim mismatch) and
 `LEASE_DISCLOSURE_REQUIRED` (missing Regulation M trigger-term disclosures) —
 with the extracted claims and evidence attached.
 
+### The two-minute demo
+
+```bash
+uv run python -m scripts.demo
+```
+
+Runs the whole pitch against the seeded inventory:
+
+1. **Validate** a deceptive ad ("Civic *Touring* for $249/mo", no disclosures) →
+   `FAIL` on the exact rules broken (wrong trim, wrong price, missing CA stock id).
+2. **Generate** a compliant ad for the same vehicle → auto-validated to `PASS`,
+   self-correcting if the first draft falls short.
+3. **Validate an ad image** whose displayed price says `$19,999` while inventory
+   says `$26,200` → `FAIL` on `ADVERTISED_PRICE_MATCHES_SOURCE`.
+
+In every act the LLM only *extracts claims* — the deterministic engine decides
+the verdict, and each run is written to the audit trail with a structured log
+line carrying its run ID.
+
 ### Endpoints
 
 | Method | Path | Purpose |
@@ -180,6 +199,32 @@ See [`CLAUDE.md`](CLAUDE.md) for architecture principles and conventions, and
 the full scope and roadmap.
 
 ---
+
+## Architecture decisions
+
+The choices that matter, and why:
+
+- **The LLM never emits the verdict.** Fuzzy extraction in, deterministic
+  judgment out. The model turns messy ad text/images into a typed `AdClaims`
+  object; pure-function rules produce `PASS`/`FAIL`/`REQUIRES_REVIEW`. This is
+  what makes the system testable, auditable, and trustworthy enough to *block*.
+- **Recall over precision on blockers.** A missed violation is the costly error;
+  a false positive only routes an ad to a human. We target ≥ 0.95 blocker recall
+  and favor `REQUIRES_REVIEW` over a risky `PASS` (low extraction confidence is
+  itself a review trigger). The eval gate enforces this in CI.
+- **Rules are data, not code.** Authored as YAML, stored as versioned `rule`
+  rows, pinned per run via an immutable `ruleset_version`. The catalog grows
+  without redeploys; the predicate *vocabulary* stays small and fully tested.
+- **Deterministic by construction for rendered creative.** HTML/image ads are
+  populated from source data, so displayed price/trim/disclaimers are faithful
+  by design; vision OCR becomes a belt-and-suspenders cross-check, not the sole
+  guard.
+- **Immutable audit, human override logged.** The verdict on a run is never
+  mutated; reviewer approve/reject/override decisions are appended. Every run is
+  pinned to its ruleset version and emits a structured log line with its run ID.
+- **Provider-swappable, typed agents.** Pydantic AI enforces the `AdClaims`
+  contract; models are configured, not hard-coded. v1 runs a synchronous stack
+  for simplicity (async is a Phase 4 concern when the queue lands).
 
 ## Status
 
