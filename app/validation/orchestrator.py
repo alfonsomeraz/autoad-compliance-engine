@@ -9,6 +9,7 @@ itself — that is the engine's job.
 
 from __future__ import annotations
 
+import hashlib
 from datetime import datetime, timezone
 from typing import NamedTuple
 
@@ -16,12 +17,13 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.llm.extraction import Extractor, llm_extractor
-from app.models.claims import SourceFacts
+from app.models.claims import AdClaims, SourceFacts
 from app.models.enums import AssetFormat, Channel
 from app.models.tables import AdAsset, ComplianceRun, Offer, Vehicle, Violation
 from app.rules import engine, sync
 from app.rules.catalog import load_catalog
 from app.rules.schema import Finding, RuleSpec
+from app.vision.extraction import VisionExtractor, llm_vision_extractor
 
 
 class ResolvedRuleset(NamedTuple):
@@ -122,17 +124,89 @@ def validate_ad(
     db.add(asset)
     db.flush()
 
-    ruleset = resolve_ruleset(db, catalog)
     extraction = extractor(copy_text)
+    return _evaluate_and_record(
+        db,
+        asset=asset,
+        vehicle=vehicle,
+        offer=offer,
+        jurisdiction=jurisdiction,
+        claims=extraction.claims,
+        model_versions={"extraction": extraction.model_name},
+        catalog=catalog,
+    )
+
+
+def validate_ad_image(
+    db: Session,
+    *,
+    vehicle_id: int,
+    image_bytes: bytes,
+    media_type: str = "image/png",
+    channel: Channel = Channel.DISPLAY,
+    vision_extractor: VisionExtractor = llm_vision_extractor,
+    catalog: list[RuleSpec] | None = None,
+) -> ComplianceRun:
+    """Validate an ad IMAGE: vision-extract the displayed claims and cross-check
+    them against source via the same rule engine. Persists an image ad_asset +
+    compliance_run. This is how a price/trim mismatch in creative gets caught."""
+    vehicle = db.get(Vehicle, vehicle_id)
+    if vehicle is None:
+        raise LookupError(f"Vehicle {vehicle_id} not found")
+
+    offer = db.scalars(
+        select(Offer).where(Offer.vehicle_id == vehicle_id).order_by(Offer.id)
+    ).first()
+    jurisdiction = vehicle.dealership.jurisdiction
+
+    # No object store yet (Phase 4); record a content-addressed reference.
+    image_ref = f"sha256:{hashlib.sha256(image_bytes).hexdigest()[:16]}"
+    asset = AdAsset(
+        vehicle_id=vehicle_id,
+        channel=channel,
+        format=AssetFormat.IMAGE,
+        generated_by="human",
+        image_s3_key=image_ref,
+    )
+    db.add(asset)
+    db.flush()
+
+    extraction = vision_extractor(image_bytes, media_type)
+    return _evaluate_and_record(
+        db,
+        asset=asset,
+        vehicle=vehicle,
+        offer=offer,
+        jurisdiction=jurisdiction,
+        claims=extraction.claims,
+        model_versions={"vision_extraction": extraction.model_name},
+        catalog=catalog,
+    )
+
+
+def _evaluate_and_record(
+    db: Session,
+    *,
+    asset: AdAsset,
+    vehicle: Vehicle,
+    offer: Offer | None,
+    jurisdiction: str,
+    claims: AdClaims,
+    model_versions: dict,
+    catalog: list[RuleSpec] | None,
+) -> ComplianceRun:
+    """Evaluate claims against the resolved ruleset and persist the immutable
+    compliance_run + violations. Shared by the text and image paths."""
+    ruleset = resolve_ruleset(db, catalog)
     source = build_source_facts(vehicle, offer)
-    result = engine.evaluate(ruleset.specs, extraction.claims, source, jurisdiction=jurisdiction)
+    result = engine.evaluate(ruleset.specs, claims, source, jurisdiction=jurisdiction)
 
     run = ComplianceRun(
         ad_asset_id=asset.id,
         ruleset_version_id=ruleset.ruleset_version_id,
         status=result.verdict,
-        extracted_claims=extraction.claims.model_dump(mode="json"),
-        model_versions={"extraction": extraction.model_name},
+        extracted_claims=claims.model_dump(mode="json"),
+        model_versions=model_versions,
         completed_at=datetime.now(timezone.utc),
     )
     run.violations = violations_from(result.findings, ruleset.rule_id_by_key)
