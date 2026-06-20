@@ -100,6 +100,7 @@ with the extracted claims and evidence attached.
 | Method | Path | Purpose |
 |---|---|---|
 | `POST` | `/validate` | Validate ad copy for a vehicle → verdict + violations |
+| `POST` | `/validate-image` | Validate an ad **image** (vision-extract displayed values → cross-check) |
 | `POST` | `/generate` | Generate compliant copy (auto-validate + self-correct) |
 | `GET` | `/reviews?status=REQUIRES_REVIEW` | The review queue |
 | `GET` | `/runs/{id}` | Full audit detail for one compliance run |
@@ -109,6 +110,16 @@ with the extracted claims and evidence attached.
 Every run is pinned to an immutable `ruleset_version`, and reviewer decisions
 are appended to the audit trail — the deterministic verdict itself is never
 mutated, so overrides are logged, never silent.
+
+### Multimodal validation
+
+Ads can be rendered as HTML/PNG from source data (price/trim/disclaimers
+deterministic *by construction*), and any ad **image** can be validated: a
+vision model extracts the *displayed* values into the same `AdClaims` schema,
+which the same deterministic engine cross-checks against inventory. This catches
+"the picture says $19,999 but the offer is $26,200" — proven live in
+`evals/deepeval/test_vision_money_shot.py` (tampered image → `FAIL` on
+`ADVERTISED_PRICE_MATCHES_SOURCE`).
 
 ---
 
@@ -177,8 +188,8 @@ the full scope and roadmap.
 | **0** | Vertical slice: data foundation, `AdClaims`, rule engine, extraction, `POST /validate` | ✅ Done |
 | **1** | Rules as versioned DB rows + `ruleset_version` pinning, 12-rule catalog (federal + CA + OEM), audit trail + review-queue API | ✅ Done |
 | **2** | Copy generation + the eval hero + CI gate | ✅ Done |
-| **3** | Multimodal validation (HTML render + vision extraction) | 🚧 Next |
-| **4** | Production on AWS (Docker, Terraform, async pipeline) | ⬜ Planned |
+| **3** | Multimodal validation (HTML render + vision extraction) | ✅ Done |
+| **4** | Production on AWS (Docker, Terraform, async pipeline) | 🚧 Next |
 
 **Tech:** Python 3.12 · FastAPI · Pydantic AI · Pydantic v2 · PostgreSQL +
 SQLAlchemy 2.0 + Alembic · DeepEval · Docker.

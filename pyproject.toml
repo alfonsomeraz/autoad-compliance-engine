@@ -29,6 +29,7 @@ dependencies = [
     "boto3>=1.28",  # AWS SDK (for phase 4 deployment)
     "pydantic-settings>=2.14.2",
     "pyyaml>=6.0.3",
+    "pillow>=12.2.0",
 ]
 
 # Optional groups for development, testing, and evaluation
