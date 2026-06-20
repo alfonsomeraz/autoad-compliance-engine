@@ -65,6 +65,19 @@ def test_lessee_responsibility_disclaimer_detected_by_keyword():
     assert predicates.evaluate({"claim_present": "lessee_responsibility_disclaimer"}, c) is True
 
 
+def test_lessee_responsibility_detected_with_natural_phrasing():
+    # "Lessee is responsible for..." must be detected (tokens, not a rigid substring).
+    c = ctx(
+        AdClaims(disclaimers=["Lessee is responsible for insurance, maintenance, and excess wear."])
+    )
+    assert predicates.evaluate({"claim_present": "lessee_responsibility_disclaimer"}, c) is True
+
+
+def test_lessee_responsibility_not_detected_without_responsibility_language():
+    c = ctx(AdClaims(disclaimers=["The lessee enjoys a great driving experience."]))
+    assert predicates.evaluate({"claim_present": "lessee_responsibility_disclaimer"}, c) is False
+
+
 # --- claim_equals_source ---------------------------------------------------
 
 

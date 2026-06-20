@@ -9,6 +9,7 @@ from __future__ import annotations
 
 from fastapi import FastAPI
 
+from app.api.generate import router as generate_router
 from app.api.review import router as review_router
 from app.api.validate import router as validate_router
 
@@ -19,6 +20,7 @@ app = FastAPI(
 )
 
 app.include_router(validate_router, tags=["validation"])
+app.include_router(generate_router)
 app.include_router(review_router)
 
 

@@ -10,6 +10,7 @@ itself — that is the engine's job.
 from __future__ import annotations
 
 from datetime import datetime, timezone
+from typing import NamedTuple
 
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -20,7 +21,42 @@ from app.models.enums import AssetFormat, Channel
 from app.models.tables import AdAsset, ComplianceRun, Offer, Vehicle, Violation
 from app.rules import engine, sync
 from app.rules.catalog import load_catalog
-from app.rules.schema import RuleSpec
+from app.rules.schema import Finding, RuleSpec
+
+
+class ResolvedRuleset(NamedTuple):
+    specs: list[RuleSpec]
+    rule_id_by_key: dict[str, int]
+    ruleset_version_id: int | None
+
+
+def resolve_ruleset(db: Session, catalog: list[RuleSpec] | None = None) -> ResolvedRuleset:
+    """Resolve the rules to evaluate against. An explicit catalog (tests) wins;
+    otherwise pin to the active ruleset_version; otherwise fall back to YAML."""
+    if catalog is not None:
+        return ResolvedRuleset(catalog, {}, None)
+    active = sync.get_active_ruleset(db)
+    if active is not None:
+        return ResolvedRuleset(
+            specs=[sync.rulespec_from_row(r) for r in active.rules],
+            rule_id_by_key={r.rule_key: r.id for r in active.rules},
+            ruleset_version_id=active.id,
+        )
+    return ResolvedRuleset(load_catalog(), {}, None)
+
+
+def violations_from(findings: list[Finding], rule_id_by_key: dict[str, int]) -> list[Violation]:
+    """Build Violation rows from engine findings, linking to rule rows."""
+    return [
+        Violation(
+            rule_id=rule_id_by_key.get(f.rule_key),
+            rule_key=f.rule_key,
+            severity=f.severity,
+            message=f.message,
+            evidence=f.evidence,
+        )
+        for f in findings
+    ]
 
 
 def build_source_facts(vehicle: Vehicle, offer: Offer | None) -> SourceFacts:
@@ -34,6 +70,8 @@ def build_source_facts(vehicle: Vehicle, offer: Offer | None) -> SourceFacts:
         "msrp": vehicle.msrp,
         "dealer_price": vehicle.dealer_price,
         "condition": str(vehicle.condition),
+        "stock_number": vehicle.stock_number,
+        "vin": vehicle.vin,
     }
     off: dict = {"effective_price": vehicle.dealer_price}
     if offer is not None:
@@ -84,43 +122,20 @@ def validate_ad(
     db.add(asset)
     db.flush()
 
-    # Resolve the ruleset: an explicit catalog (tests) wins; otherwise pin to
-    # the active ruleset_version in the DB; otherwise fall back to YAML.
-    rule_id_by_key: dict[str, int] = {}
-    ruleset_version_id: int | None = None
-    if catalog is not None:
-        specs = catalog
-    else:
-        active = sync.get_active_ruleset(db)
-        if active is not None:
-            specs = [sync.rulespec_from_row(r) for r in active.rules]
-            rule_id_by_key = {r.rule_key: r.id for r in active.rules}
-            ruleset_version_id = active.id
-        else:
-            specs = load_catalog()
-
+    ruleset = resolve_ruleset(db, catalog)
     extraction = extractor(copy_text)
     source = build_source_facts(vehicle, offer)
-    result = engine.evaluate(specs, extraction.claims, source, jurisdiction=jurisdiction)
+    result = engine.evaluate(ruleset.specs, extraction.claims, source, jurisdiction=jurisdiction)
 
     run = ComplianceRun(
         ad_asset_id=asset.id,
-        ruleset_version_id=ruleset_version_id,
+        ruleset_version_id=ruleset.ruleset_version_id,
         status=result.verdict,
         extracted_claims=extraction.claims.model_dump(mode="json"),
         model_versions={"extraction": extraction.model_name},
         completed_at=datetime.now(timezone.utc),
     )
-    run.violations = [
-        Violation(
-            rule_id=rule_id_by_key.get(f.rule_key),
-            rule_key=f.rule_key,
-            severity=f.severity,
-            message=f.message,
-            evidence=f.evidence,
-        )
-        for f in result.findings
-    ]
+    run.violations = violations_from(result.findings, ruleset.rule_id_by_key)
     db.add(run)
     db.commit()
     db.refresh(run)

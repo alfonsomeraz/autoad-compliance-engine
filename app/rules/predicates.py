@@ -19,7 +19,7 @@ from typing import Any, Callable
 
 from app.models.claims import AdClaims, SourceFacts
 
-_LESSEE_RESPONSIBILITY_KEYWORDS = ("lessee responsib", "responsible for excess")
+_LESSEE_RESPONSIBILITY_PHRASES = ("responsible for excess", "lessee responsib")
 
 
 @dataclass
@@ -42,9 +42,14 @@ def _first(*values: Any) -> Any:
 
 
 def _lessee_disclaimer(claims: AdClaims) -> str | None:
+    """Detect lessee-responsibility language. Matches a fixed phrase or the
+    co-occurrence of "lessee" + "responsib" in one disclaimer, so natural
+    phrasings like "Lessee is responsible for..." are caught."""
     for disclaimer in claims.disclaimers:
         lowered = disclaimer.lower()
-        if any(kw in lowered for kw in _LESSEE_RESPONSIBILITY_KEYWORDS):
+        if any(phrase in lowered for phrase in _LESSEE_RESPONSIBILITY_PHRASES):
+            return disclaimer
+        if "lessee" in lowered and "responsib" in lowered:
             return disclaimer
     return None
 
