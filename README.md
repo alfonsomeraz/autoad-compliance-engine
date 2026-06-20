@@ -100,6 +100,7 @@ with the extracted claims and evidence attached.
 | Method | Path | Purpose |
 |---|---|---|
 | `POST` | `/validate` | Validate ad copy for a vehicle → verdict + violations |
+| `POST` | `/generate` | Generate compliant copy (auto-validate + self-correct) |
 | `GET` | `/reviews?status=REQUIRES_REVIEW` | The review queue |
 | `GET` | `/runs/{id}` | Full audit detail for one compliance run |
 | `POST` | `/runs/{id}/decisions` | Log a reviewer decision (approve/reject/override) |
@@ -124,7 +125,24 @@ Three independently testable surfaces:
 |---|---|---|
 | **Rule-logic correctness** | `pytest` (pure functions) | Every predicate + rule fixture; deterministic, always green |
 | **Extraction quality** | DeepEval | Recall on trigger-term detection (the dangerous miss) |
-| **Generation faithfulness** | DeepEval + field-match | Zero hallucinated facts in generated copy *(Phase 2)* |
+| **Generation faithfulness** | DeepEval + field-match | Zero hallucinated facts in generated copy |
+| **End-to-end accuracy** | golden set (50 labeled ads) | Confusion matrix + blocker recall over the full pipeline |
+
+**The eval gate** (`evals/deepeval/`, CI-gated) runs the live pipeline over a
+golden set of 50 labeled ads and fails the build if blocker recall regresses
+below 0.95 or generation hallucinates a fact. Current run:
+
+```
+Trigger-term recall: 1.000 (78/78)
+Blocker recall:      1.000 (31/31)
+Confusion matrix (expected -> predicted):
+              PASS: {'PASS': 7,  'FAIL': 0,  'REQUIRES_REVIEW': 0}
+              FAIL: {'PASS': 0,  'FAIL': 31, 'REQUIRES_REVIEW': 0}
+   REQUIRES_REVIEW: {'PASS': 0,  'FAIL': 0,  'REQUIRES_REVIEW': 12}
+```
+
+The golden dataset is built by `scripts/build_golden.py`; a deterministic test
+(`tests/test_golden_dataset.py`) guards its labels against drift in CI.
 
 ---
 
@@ -158,8 +176,8 @@ the full scope and roadmap.
 |---|---|---|
 | **0** | Vertical slice: data foundation, `AdClaims`, rule engine, extraction, `POST /validate` | ✅ Done |
 | **1** | Rules as versioned DB rows + `ruleset_version` pinning, 12-rule catalog (federal + CA + OEM), audit trail + review-queue API | ✅ Done |
-| **2** | Copy generation + the eval hero + CI gate | 🚧 Next |
-| **3** | Multimodal validation (HTML render + vision extraction) | ⬜ Planned |
+| **2** | Copy generation + the eval hero + CI gate | ✅ Done |
+| **3** | Multimodal validation (HTML render + vision extraction) | 🚧 Next |
 | **4** | Production on AWS (Docker, Terraform, async pipeline) | ⬜ Planned |
 
 **Tech:** Python 3.12 · FastAPI · Pydantic AI · Pydantic v2 · PostgreSQL +
