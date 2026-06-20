@@ -12,9 +12,11 @@ from datetime import date, timedelta
 from decimal import Decimal
 
 import pytest
+from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
-from app.db import engine
+from app.db import engine, get_db
+from app.main import app
 from app.models.claims import AdClaims
 from app.models.enums import OfferType, VehicleCondition
 from app.models.tables import Dealership, OEM, Offer, Vehicle
@@ -65,6 +67,14 @@ def civic(db_session) -> Vehicle:
     db_session.add(vehicle)
     db_session.flush()
     return vehicle
+
+
+@pytest.fixture
+def client(db_session):
+    """TestClient with the DB dependency overridden to the rolled-back session."""
+    app.dependency_overrides[get_db] = lambda: db_session
+    yield TestClient(app)
+    app.dependency_overrides.clear()
 
 
 @pytest.fixture

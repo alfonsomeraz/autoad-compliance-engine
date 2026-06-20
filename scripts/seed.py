@@ -23,6 +23,7 @@ from app.models.tables import (
     Dealership,
     OEM,
     Offer,
+    ReviewDecision,
     Vehicle,
     Violation,
 )
@@ -39,6 +40,7 @@ def _vin(n: int) -> str:
 
 def _clear(session) -> None:
     """Remove dependent rows first, then inventory, so FKs stay satisfied."""
+    session.execute(delete(ReviewDecision))
     session.execute(delete(Violation))
     session.execute(delete(ComplianceRun))
     session.execute(delete(AdAsset))

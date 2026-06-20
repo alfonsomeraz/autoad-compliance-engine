@@ -93,6 +93,20 @@ returns `FAIL` on `ADVERTISED_TRIM_MATCHES_SOURCE` (trim mismatch) and
 `LEASE_DISCLOSURE_REQUIRED` (missing Regulation M trigger-term disclosures) —
 with the extracted claims and evidence attached.
 
+### Endpoints
+
+| Method | Path | Purpose |
+|---|---|---|
+| `POST` | `/validate` | Validate ad copy for a vehicle → verdict + violations |
+| `GET` | `/reviews?status=REQUIRES_REVIEW` | The review queue |
+| `GET` | `/runs/{id}` | Full audit detail for one compliance run |
+| `POST` | `/runs/{id}/decisions` | Log a reviewer decision (approve/reject/override) |
+| `GET` | `/ruleset/active` | The active ruleset and its rules (catalog view) |
+
+Every run is pinned to an immutable `ruleset_version`, and reviewer decisions
+are appended to the audit trail — the deterministic verdict itself is never
+mutated, so overrides are logged, never silent.
+
 ---
 
 ## Testing & evals
@@ -141,8 +155,8 @@ the full scope and roadmap.
 | Phase | Scope | State |
 |---|---|---|
 | **0** | Vertical slice: data foundation, `AdClaims`, rule engine, extraction, `POST /validate` | ✅ Done |
-| **1** | Rules as versioned DB rows, fuller catalog, audit trail + review queue | 🚧 In progress |
-| **2** | Copy generation + the eval hero + CI gate | ⬜ Planned |
+| **1** | Rules as versioned DB rows + `ruleset_version` pinning, 12-rule catalog (federal + CA + OEM), audit trail + review-queue API | ✅ Done |
+| **2** | Copy generation + the eval hero + CI gate | 🚧 Next |
 | **3** | Multimodal validation (HTML render + vision extraction) | ⬜ Planned |
 | **4** | Production on AWS (Docker, Terraform, async pipeline) | ⬜ Planned |
 

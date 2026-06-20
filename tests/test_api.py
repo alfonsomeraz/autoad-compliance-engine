@@ -9,11 +9,7 @@ from __future__ import annotations
 
 from decimal import Decimal
 
-import pytest
-from fastapi.testclient import TestClient
-
 from app.api.validate import get_extractor
-from app.db import get_db
 from app.llm.extraction import ExtractionResult
 from app.main import app
 from app.models.claims import AdClaims
@@ -24,13 +20,6 @@ def stub(claims: AdClaims):
         return ExtractionResult(claims=claims, model_name="stub-model")
 
     return _extract
-
-
-@pytest.fixture
-def client(db_session):
-    app.dependency_overrides[get_db] = lambda: db_session
-    yield TestClient(app)
-    app.dependency_overrides.clear()
 
 
 def test_validate_returns_fail_with_violations(client, civic, active_ruleset):
