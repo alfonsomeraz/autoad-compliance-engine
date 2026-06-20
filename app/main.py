@@ -8,17 +8,23 @@ Thin HTTP layer; all logic lives in the validation/rules/llm packages. Run with:
 from __future__ import annotations
 
 import uuid
+from pathlib import Path
 
 import structlog
 from fastapi import FastAPI, Request
+from fastapi.responses import RedirectResponse
+from fastapi.staticfiles import StaticFiles
 
 from app.api.generate import router as generate_router
 from app.api.review import router as review_router
 from app.api.validate import router as validate_router
 from app.api.validate_image import router as validate_image_router
+from app.api.vehicles import router as vehicles_router
 from app.observability import configure_logging
 
 configure_logging()
+
+_STATIC_DIR = Path(__file__).resolve().parent / "web" / "static"
 
 app = FastAPI(
     title="AutoAd Compliance AI Engine",
@@ -39,8 +45,18 @@ app.include_router(validate_router, tags=["validation"])
 app.include_router(validate_image_router)
 app.include_router(generate_router)
 app.include_router(review_router)
+app.include_router(vehicles_router)
 
 
 @app.get("/health", tags=["meta"])
 def health() -> dict[str, str]:
     return {"status": "ok"}
+
+
+@app.get("/", include_in_schema=False)
+def root() -> RedirectResponse:
+    return RedirectResponse(url="/ui/")
+
+
+# The thin web UI (served last so it doesn't shadow API routes).
+app.mount("/ui", StaticFiles(directory=_STATIC_DIR, html=True), name="ui")

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AutoAd Compliance — Review queue</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="review">
+  <div class="topbar">
+    <div class="brand"><span class="gate">&#9211;</span> AutoAd Compliance</div>
+    <nav class="nav">
+      <a href="/ui/">Validate</a>
+      <a href="review.html" class="active">Review queue</a>
+    </nav>
+  </div>
+
+  <main class="layout">
+    <section class="panel">
+      <h2>Queue</h2>
+      <div class="field">
+        <label for="statusFilter">Filter by verdict</label>
+        <select id="statusFilter">
+          <option value="REQUIRES_REVIEW" selected>Requires review</option>
+          <option value="FAIL">Blocked</option>
+          <option value="PASS">Passed</option>
+        </select>
+      </div>
+      <div class="queue" id="queue"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Audit detail</h2>
+      <div class="result" id="detail">
+        <div class="empty">Select a run to review its evidence and decide.</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>Overrides are logged, never silent. The deterministic verdict is never mutated.</footer>
+  <div class="toast" id="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>

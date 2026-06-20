@@ -25,6 +25,7 @@ router = APIRouter()
 class RunSummary(BaseModel):
     run_id: int
     ad_asset_id: int
+    vehicle_id: int
     status: Verdict
     violation_count: int
     ruleset_version_id: int | None
@@ -86,6 +87,7 @@ def list_reviews(
         RunSummary(
             run_id=r.id,
             ad_asset_id=r.ad_asset_id,
+            vehicle_id=r.ad_asset.vehicle_id,
             status=r.status,
             violation_count=len(r.violations),
             ruleset_version_id=r.ruleset_version_id,

@@ -77,9 +77,12 @@ uv run python -m scripts.seed
 # 4. Configure your key
 cp .env.example .env   # then set ANTHROPIC_API_KEY
 
-# 5. Run the API
+# 5. Run the API + web UI
 uv run uvicorn app.main:app --reload
 ```
+
+Then open **http://localhost:8000** for the thin web UI (validate, generate,
+review queue), or **/docs** for the interactive API explorer.
 
 Validate an ad:
 

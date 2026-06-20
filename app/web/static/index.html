@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AutoAd Compliance — Validate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="validate">
+  <div class="topbar">
+    <div class="brand"><span class="gate">&#9211;</span> AutoAd Compliance</div>
+    <nav class="nav">
+      <a href="/ui/" class="active">Validate</a>
+      <a href="review.html">Review queue</a>
+    </nav>
+  </div>
+
+  <main class="layout">
+    <section class="panel">
+      <h2>Submit an ad</h2>
+      <div class="field">
+        <label for="vehicle">Vehicle</label>
+        <select id="vehicle"></select>
+      </div>
+      <div class="field">
+        <label for="channel">Channel</label>
+        <select id="channel">
+          <option value="display">Display</option>
+          <option value="google">Google</option>
+          <option value="meta">Meta</option>
+          <option value="email">Email</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="copy">Ad copy</label>
+        <textarea id="copy" placeholder="Drive home the Honda Civic Touring for just $249/mo! Hurry in."></textarea>
+      </div>
+      <div class="actions">
+        <button class="btn btn-primary" id="validateBtn">Validate ad</button>
+        <button class="btn btn-ghost" id="generateBtn">Generate compliant ad</button>
+      </div>
+      <p class="hint">Validate checks copy you paste. Generate writes compliant
+        copy from inventory, auto-validates it, and self-corrects if needed.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Verdict</h2>
+      <div class="result" id="result">
+        <div class="empty">Submit an ad to see its verdict.</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>Not legal advice — a curated approximation that assists a compliance team. Human approval is a feature.</footer>
+  <div class="toast" id="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
