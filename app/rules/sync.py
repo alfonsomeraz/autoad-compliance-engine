@@ -39,9 +39,7 @@ def sync_rules(db: Session, specs: list[RuleSpec]) -> list[Rule]:
     rows: list[Rule] = []
     for spec in specs:
         row = db.scalar(
-            select(Rule).where(
-                Rule.rule_key == spec.rule_key, Rule.version == spec.version
-            )
+            select(Rule).where(Rule.rule_key == spec.rule_key, Rule.version == spec.version)
         )
         if row is None:
             row = Rule(rule_key=spec.rule_key, version=spec.version)
@@ -58,9 +56,7 @@ def sync_rules(db: Session, specs: list[RuleSpec]) -> list[Rule]:
     return rows
 
 
-def create_ruleset_version(
-    db: Session, label: str, rules: list[Rule]
-) -> RulesetVersion:
+def create_ruleset_version(db: Session, label: str, rules: list[Rule]) -> RulesetVersion:
     """Snapshot the given rules into a new active ruleset_version, deactivating
     any previously active one (only one active at a time)."""
     db.execute(update(RulesetVersion).values(is_active=False))

@@ -26,14 +26,10 @@ def stub(claims: AdClaims):
 
 
 def _make_run(db, civic, claims):
-    return validate_ad(
-        db, vehicle_id=civic.id, copy_text="ad", extractor=stub(claims)
-    )
+    return validate_ad(db, vehicle_id=civic.id, copy_text="ad", extractor=stub(claims))
 
 
-def test_queue_lists_only_requires_review(
-    db_session, civic, active_ruleset, compliant_claims
-):
+def test_queue_lists_only_requires_review(db_session, civic, active_ruleset, compliant_claims):
     review_run = _make_run(
         db_session, civic, compliant_claims.model_copy(update={"extraction_confidence": 0.2})
     )
@@ -80,8 +76,11 @@ def test_override_is_logged(db_session, civic, active_ruleset):
     bad = AdClaims(lease_monthly_payment=Decimal("299.00"), trim_claimed="Touring")
     run = _make_run(db_session, civic, bad)
     service.record_decision(
-        db_session, run.id, reviewer="mgr@dealer.com",
-        decision=ReviewDecisionType.OVERRIDE, notes="Approved by legal.",
+        db_session,
+        run.id,
+        reviewer="mgr@dealer.com",
+        decision=ReviewDecisionType.OVERRIDE,
+        notes="Approved by legal.",
     )
     refreshed = service.get_run(db_session, run.id)
     assert refreshed.review_decisions[0].decision is ReviewDecisionType.OVERRIDE

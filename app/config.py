@@ -16,9 +16,7 @@ class Settings(BaseSettings):
     rule-engine tests) run without it.
     """
 
-    model_config = SettingsConfigDict(
-        env_file=".env", env_file_encoding="utf-8", extra="ignore"
-    )
+    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 
     database_url: str = Field(
         default="postgresql+psycopg2://autoad:autoad@localhost:5432/autoad_dev",
@@ -30,12 +28,8 @@ class Settings(BaseSettings):
     log_level: str = Field(default="INFO", alias="LOG_LEVEL")
 
     # Model selection — Sonnet for quality, Haiku for cheap/high-volume passes.
-    llm_model_generation: str = Field(
-        default="claude-sonnet-4-6", alias="LLM_MODEL_GENERATION"
-    )
-    llm_model_extraction: str = Field(
-        default="claude-sonnet-4-6", alias="LLM_MODEL_EXTRACTION"
-    )
+    llm_model_generation: str = Field(default="claude-sonnet-4-6", alias="LLM_MODEL_GENERATION")
+    llm_model_extraction: str = Field(default="claude-sonnet-4-6", alias="LLM_MODEL_EXTRACTION")
     llm_model_extraction_cheap: str = Field(
         default="claude-haiku-4-5-20251001", alias="LLM_MODEL_EXTRACTION_CHEAP"
     )

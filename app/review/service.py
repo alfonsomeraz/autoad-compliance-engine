@@ -14,9 +14,7 @@ from app.models.enums import ReviewDecisionType, Verdict
 from app.models.tables import ComplianceRun, ReviewDecision
 
 
-def list_runs(
-    db: Session, status: Verdict | None = None, limit: int = 50
-) -> list[ComplianceRun]:
+def list_runs(db: Session, status: Verdict | None = None, limit: int = 50) -> list[ComplianceRun]:
     """List runs, most recent first, optionally filtered by verdict status.
     Pass status=REQUIRES_REVIEW for the review queue."""
     stmt = select(ComplianceRun).order_by(ComplianceRun.started_at.desc()).limit(limit)

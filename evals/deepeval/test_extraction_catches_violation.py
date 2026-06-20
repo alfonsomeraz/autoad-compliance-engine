@@ -106,8 +106,6 @@ def test_extraction_catches_missing_lease_disclosure():
     assert_test(test_case, [TriggerTermRecallMetric()])
 
     # 2) The deterministic engine must then block the ad.
-    result = engine.evaluate(
-        load_catalog(), claims, _civic_source(), jurisdiction="US"
-    )
+    result = engine.evaluate(load_catalog(), claims, _civic_source(), jurisdiction="US")
     assert result.verdict is Verdict.FAIL
     assert "LEASE_DISCLOSURE_REQUIRED" in {f.rule_key for f in result.findings}

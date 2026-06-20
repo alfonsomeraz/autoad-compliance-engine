@@ -33,6 +33,7 @@ class EvalContext:
 # (e.g. "down_payment_or_amount_due_at_signing") encode trigger-term logic in
 # one place. A resolver returns the value, or None when the claim is absent.
 
+
 def _first(*values: Any) -> Any:
     for v in values:
         if v is not None:
@@ -57,9 +58,7 @@ CLAIM_RESOLVERS: dict[str, Callable[[AdClaims], Any]] = {
     "finance_monthly_payment": lambda c: c.finance_monthly_payment,
     "finance_term_months": lambda c: c.finance_term_months,
     "expiration_date": lambda c: c.expiration_date,
-    "down_payment_or_amount_due_at_signing": lambda c: _first(
-        c.down_payment, c.due_at_signing
-    ),
+    "down_payment_or_amount_due_at_signing": lambda c: _first(c.down_payment, c.due_at_signing),
     "total_of_payments_or_apr": lambda c: _first(c.total_of_payments, c.apr),
     # A specific advertised vehicle identified by stock number or VIN.
     "vehicle_identifier": lambda c: _first(c.stock_number_claimed, c.vin_claimed),
@@ -156,7 +155,7 @@ def evaluate(node: dict, ctx: EvalContext) -> bool:
     """
     if len(node) != 1:
         raise ValueError(f"Predicate node must have exactly one key: {node!r}")
-    (key, arg), = node.items()
+    ((key, arg),) = node.items()
 
     if key == "all":
         return all(evaluate(child, ctx) for child in arg)

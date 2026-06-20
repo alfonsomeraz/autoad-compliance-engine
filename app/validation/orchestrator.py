@@ -101,9 +101,7 @@ def validate_ad(
 
     extraction = extractor(copy_text)
     source = build_source_facts(vehicle, offer)
-    result = engine.evaluate(
-        specs, extraction.claims, source, jurisdiction=jurisdiction
-    )
+    result = engine.evaluate(specs, extraction.claims, source, jurisdiction=jurisdiction)
 
     run = ComplianceRun(
         ad_asset_id=asset.id,

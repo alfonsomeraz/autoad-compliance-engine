@@ -41,9 +41,7 @@ def evaluate(
         applies = predicates.evaluate(rule.applies_when, ctx) if rule.applies_when else True
         if not applies:
             continue
-        satisfied = (
-            predicates.evaluate(rule.requirement, ctx) if rule.requirement else True
-        )
+        satisfied = predicates.evaluate(rule.requirement, ctx) if rule.requirement else True
         if satisfied:
             continue
 
@@ -62,9 +60,7 @@ def evaluate(
 
     low_confidence = claims.is_low_confidence
     verdict = _verdict_for(findings, low_confidence)
-    return EvaluationResult(
-        verdict=verdict, findings=findings, low_confidence=low_confidence
-    )
+    return EvaluationResult(verdict=verdict, findings=findings, low_confidence=low_confidence)
 
 
 def _verdict_for(findings: list[Finding], low_confidence: bool) -> Verdict:

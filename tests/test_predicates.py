@@ -30,27 +30,19 @@ def test_claim_present_false_when_field_absent():
 
 def test_claim_present_false_for_empty_disclaimer_list():
     c = ctx(AdClaims(disclaimers=[]))
-    assert (
-        predicates.evaluate({"claim_present": "lessee_responsibility_disclaimer"}, c)
-        is False
-    )
+    assert predicates.evaluate({"claim_present": "lessee_responsibility_disclaimer"}, c) is False
 
 
 def test_composite_claim_due_at_signing_or_down_payment():
     c = ctx(AdClaims(due_at_signing=Decimal("2999")))
     assert (
-        predicates.evaluate(
-            {"claim_present": "down_payment_or_amount_due_at_signing"}, c
-        )
-        is True
+        predicates.evaluate({"claim_present": "down_payment_or_amount_due_at_signing"}, c) is True
     )
 
 
 def test_finance_monthly_payment_present():
     c = ctx(AdClaims(finance_monthly_payment=Decimal("589")))
-    assert (
-        predicates.evaluate({"claim_present": "finance_monthly_payment"}, c) is True
-    )
+    assert predicates.evaluate({"claim_present": "finance_monthly_payment"}, c) is True
 
 
 def test_vehicle_identifier_present_via_stock_number():
@@ -69,15 +61,8 @@ def test_vehicle_identifier_absent():
 
 
 def test_lessee_responsibility_disclaimer_detected_by_keyword():
-    c = ctx(
-        AdClaims(
-            disclaimers=["Lessee responsible for excess wear and mileage charges."]
-        )
-    )
-    assert (
-        predicates.evaluate({"claim_present": "lessee_responsibility_disclaimer"}, c)
-        is True
-    )
+    c = ctx(AdClaims(disclaimers=["Lessee responsible for excess wear and mileage charges."]))
+    assert predicates.evaluate({"claim_present": "lessee_responsibility_disclaimer"}, c) is True
 
 
 # --- claim_equals_source ---------------------------------------------------
@@ -115,9 +100,7 @@ def test_claim_equals_source_numeric_mismatch():
 
 def test_claim_equals_source_string_trim_match_case_insensitive():
     c = ctx(AdClaims(trim_claimed="sport"), vehicle={"trim": "Sport"})
-    node = {
-        "claim_equals_source": {"claim": "advertised_trim", "source": "vehicle.trim"}
-    }
+    node = {"claim_equals_source": {"claim": "advertised_trim", "source": "vehicle.trim"}}
     assert predicates.evaluate(node, c) is True
 
 

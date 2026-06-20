@@ -73,8 +73,7 @@ def get_extraction_agent() -> Agent[None, AdClaims]:
     settings = get_settings()
     if not settings.anthropic_api_key or "your-key-here" in settings.anthropic_api_key:
         raise RuntimeError(
-            "ANTHROPIC_API_KEY is not configured; set it in .env to use the "
-            "extraction agent."
+            "ANTHROPIC_API_KEY is not configured; set it in .env to use the extraction agent."
         )
     model = AnthropicModel(
         settings.llm_model_extraction,
@@ -87,6 +86,4 @@ def llm_extractor(ad_copy: str) -> ExtractionResult:
     """Production extractor: run the live Pydantic AI agent."""
     agent = get_extraction_agent()
     result = agent.run_sync(ad_copy)
-    return ExtractionResult(
-        claims=result.output, model_name=get_settings().llm_model_extraction
-    )
+    return ExtractionResult(claims=result.output, model_name=get_settings().llm_model_extraction)

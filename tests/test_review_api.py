@@ -19,14 +19,10 @@ def stub(claims: AdClaims):
 
 def _validate(client, civic, claims):
     app.dependency_overrides[get_extractor] = lambda: stub(claims)
-    return client.post(
-        "/validate", json={"vehicle_id": civic.id, "copy_text": "ad"}
-    ).json()
+    return client.post("/validate", json={"vehicle_id": civic.id, "copy_text": "ad"}).json()
 
 
-def test_review_queue_lists_requires_review(
-    client, civic, active_ruleset, compliant_claims
-):
+def test_review_queue_lists_requires_review(client, civic, active_ruleset, compliant_claims):
     _validate(client, civic, compliant_claims.model_copy(update={"extraction_confidence": 0.2}))
     resp = client.get("/reviews")
     assert resp.status_code == 200
@@ -42,14 +38,10 @@ def test_run_detail_endpoint_returns_violations(client, civic, active_ruleset):
     assert resp.status_code == 200
     body = resp.json()
     assert body["status"] == "FAIL"
-    assert any(
-        v["rule_key"] == "ADVERTISED_TRIM_MATCHES_SOURCE" for v in body["violations"]
-    )
+    assert any(v["rule_key"] == "ADVERTISED_TRIM_MATCHES_SOURCE" for v in body["violations"])
 
 
-def test_post_decision_logs_and_appears_in_detail(
-    client, civic, active_ruleset, compliant_claims
-):
+def test_post_decision_logs_and_appears_in_detail(client, civic, active_ruleset, compliant_claims):
     run = _validate(
         client, civic, compliant_claims.model_copy(update={"extraction_confidence": 0.2})
     )

@@ -50,18 +50,14 @@ def test_every_rule_has_a_citation():
 
 
 def test_fully_compliant_lease_ad_passes(compliant_claims):
-    result = engine.evaluate(
-        CATALOG, compliant_claims, _civic_source(), jurisdiction="US-CA"
-    )
+    result = engine.evaluate(CATALOG, compliant_claims, _civic_source(), jurisdiction="US-CA")
     assert result.verdict is Verdict.PASS
 
 
 def test_finance_ad_missing_disclosures_fails():
     # Advertises a finance monthly payment but no APR / term / down payment.
     claims = AdClaims(finance_monthly_payment=Decimal("589.00"))
-    source = SourceFacts(
-        vehicle={"trim": "EX-L"}, offer={"effective_price": Decimal("32750.00")}
-    )
+    source = SourceFacts(vehicle={"trim": "EX-L"}, offer={"effective_price": Decimal("32750.00")})
     result = engine.evaluate(CATALOG, claims, source, jurisdiction="US")
     assert result.verdict is Verdict.FAIL
     assert "FINANCE_DISCLOSURE_REQUIRED" in {f.rule_key for f in result.findings}
@@ -71,17 +67,13 @@ def test_ca_priced_ad_requires_vehicle_identifier():
     # Price matches source and trim is right, but no stock number / VIN given.
     claims = AdClaims(advertised_price=Decimal("26200.00"), trim_claimed="Sport")
     result = engine.evaluate(CATALOG, claims, _civic_source(), jurisdiction="US-CA")
-    assert "CA_SPECIFIC_VEHICLE_IDENTIFIER_REQUIRED" in {
-        f.rule_key for f in result.findings
-    }
+    assert "CA_SPECIFIC_VEHICLE_IDENTIFIER_REQUIRED" in {f.rule_key for f in result.findings}
 
 
 def test_ca_rule_does_not_fire_under_federal_jurisdiction():
     claims = AdClaims(advertised_price=Decimal("26200.00"), trim_claimed="Sport")
     result = engine.evaluate(CATALOG, claims, _civic_source(), jurisdiction="US")
-    assert "CA_SPECIFIC_VEHICLE_IDENTIFIER_REQUIRED" not in {
-        f.rule_key for f in result.findings
-    }
+    assert "CA_SPECIFIC_VEHICLE_IDENTIFIER_REQUIRED" not in {f.rule_key for f in result.findings}
 
 
 def test_demo_money_shot_lease_missing_disclosures_and_wrong_trim_fails():

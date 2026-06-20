@@ -19,7 +19,7 @@ from app.db import engine, get_db
 from app.main import app
 from app.models.claims import AdClaims
 from app.models.enums import OfferType, VehicleCondition
-from app.models.tables import Dealership, OEM, Offer, Vehicle
+from app.models.tables import OEM, Dealership, Offer, Vehicle
 
 
 @pytest.fixture

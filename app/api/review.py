@@ -78,9 +78,7 @@ class ActiveRulesetOut(BaseModel):
 
 @router.get("/reviews", response_model=list[RunSummary], tags=["review"])
 def list_reviews(
-    status_filter: Verdict = Query(
-        default=Verdict.REQUIRES_REVIEW, alias="status"
-    ),
+    status_filter: Verdict = Query(default=Verdict.REQUIRES_REVIEW, alias="status"),
     db: Session = Depends(get_db),
 ) -> list[RunSummary]:
     runs = service.list_runs(db, status=status_filter)
@@ -136,9 +134,7 @@ def get_run(run_id: int, db: Session = Depends(get_db)) -> RunDetail:
     status_code=status.HTTP_201_CREATED,
     tags=["review"],
 )
-def post_decision(
-    run_id: int, body: DecisionIn, db: Session = Depends(get_db)
-) -> DecisionOut:
+def post_decision(run_id: int, body: DecisionIn, db: Session = Depends(get_db)) -> DecisionOut:
     try:
         record = service.record_decision(
             db,

@@ -54,7 +54,5 @@ def test_validate_clean_ad_passes(client, civic, active_ruleset, compliant_claim
 
 def test_validate_unknown_vehicle_returns_404(client):
     app.dependency_overrides[get_extractor] = lambda: stub(AdClaims())
-    resp = client.post(
-        "/validate", json={"vehicle_id": 999999, "copy_text": "anything"}
-    )
+    resp = client.post("/validate", json={"vehicle_id": 999999, "copy_text": "anything"})
     assert resp.status_code == 404

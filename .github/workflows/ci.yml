@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Lint & format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+          enable-cache: true
+      - run: uv sync --extra dev
+      - name: Ruff lint
+        run: uv run ruff check .
+      - name: Ruff format check
+        run: uv run ruff format --check .
+
+  test:
+    name: Tests (deterministic suite)
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: autoad
+          POSTGRES_PASSWORD: autoad
+          POSTGRES_DB: autoad_dev
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U autoad -d autoad_dev"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_URL: postgresql+psycopg2://autoad:autoad@localhost:5432/autoad_dev
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+          enable-cache: true
+      - run: uv sync --extra dev
+      - name: Apply migrations
+        run: uv run alembic upgrade head
+      - name: Run deterministic test suite
+        run: uv run pytest
+
+  # The DeepEval gate (extraction recall, generation faithfulness, blocker
+  # recall) lands in Phase 2. It needs ANTHROPIC_API_KEY and will run here as a
+  # required check that fails the build on regression.

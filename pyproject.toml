@@ -86,22 +86,25 @@ exclude = '''
 )/
 '''
 
-# Ruff linter
+# Ruff linter + formatter (ruff 0.2+ layout: lint rules live under [tool.ruff.lint])
 [tool.ruff]
 line-length = 100
 target-version = "py312"
-select = ["E", "F", "W", "I"]  # Errors, undefined names, warnings, import sorting
-ignore = ["E501"]  # Line too long (black handles it)
 exclude = [
     ".git",
     ".venv",
     "__pycache__",
     "build",
     "dist",
+    "alembic/versions",
 ]
 
-[tool.ruff.isort]
-profile = "black"
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]  # Errors, undefined names, warnings, import sorting
+ignore = ["E501"]  # Line too long (formatter handles it)
+
+[tool.ruff.lint.isort]
+known-first-party = ["app"]
 
 # MyPy type checking
 [tool.mypy]

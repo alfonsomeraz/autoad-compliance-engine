@@ -79,9 +79,7 @@ def test_low_confidence_extraction_routes_to_review(
     assert run.status is Verdict.REQUIRES_REVIEW
 
 
-def test_run_pins_to_active_ruleset_and_links_violations(
-    db_session, civic, active_ruleset
-):
+def test_run_pins_to_active_ruleset_and_links_violations(db_session, civic, active_ruleset):
     bad = AdClaims(lease_monthly_payment=Decimal("299.00"), trim_claimed="Touring")
     run = validate_ad(
         db_session,

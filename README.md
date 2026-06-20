@@ -1,5 +1,7 @@
 # AutoAd Compliance AI Engine
 
+[![CI](https://github.com/alfonsomeraz/autoad-compliance-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/alfonsomeraz/autoad-compliance-engine/actions/workflows/ci.yml)
+
 > A production-grade AI pipeline that **generates** automotive dealership ad copy
 > from inventory data and **validates** any ad against state / OEM / FTC
 > compliance rules — **blocking non-compliant outputs before they ship** through

@@ -114,14 +114,10 @@ class AdAsset(Base):
     copy_text: Mapped[str | None] = mapped_column(Text, default=None)
     image_s3_key: Mapped[str | None] = mapped_column(String(256), default=None)
     generation_metadata: Mapped[dict | None] = mapped_column(JSONB, default=None)
-    created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), server_default=func.now()
-    )
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
     vehicle: Mapped[Vehicle] = relationship(back_populates="ad_assets")
-    compliance_runs: Mapped[list[ComplianceRun]] = relationship(
-        back_populates="ad_asset"
-    )
+    compliance_runs: Mapped[list[ComplianceRun]] = relationship(back_populates="ad_asset")
 
 
 class ComplianceRun(Base):
@@ -136,12 +132,8 @@ class ComplianceRun(Base):
     status: Mapped[Verdict]
     extracted_claims: Mapped[dict | None] = mapped_column(JSONB, default=None)
     model_versions: Mapped[dict | None] = mapped_column(JSONB, default=None)
-    started_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), server_default=func.now()
-    )
-    completed_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), default=None
-    )
+    started_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), default=None)
 
     ad_asset: Mapped[AdAsset] = relationship(back_populates="compliance_runs")
     ruleset_version: Mapped[RulesetVersion | None] = relationship()
@@ -201,9 +193,7 @@ class Rule(Base):
     source_citation: Mapped[str] = mapped_column(Text, default="")
     effective_from: Mapped[date | None] = mapped_column(Date, default=None)
     effective_to: Mapped[date | None] = mapped_column(Date, default=None)
-    created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), server_default=func.now()
-    )
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
 
 class RulesetVersion(Base):
@@ -215,9 +205,7 @@ class RulesetVersion(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     label: Mapped[str] = mapped_column(String(80), unique=True)
     is_active: Mapped[bool] = mapped_column(Boolean, default=False)
-    created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), server_default=func.now()
-    )
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
     rules: Mapped[list[Rule]] = relationship(secondary=ruleset_version_rule)
 
@@ -233,10 +221,6 @@ class ReviewDecision(Base):
     reviewer: Mapped[str] = mapped_column(String(120))
     decision: Mapped[ReviewDecisionType]
     notes: Mapped[str | None] = mapped_column(Text, default=None)
-    decided_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), server_default=func.now()
-    )
+    decided_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
-    compliance_run: Mapped[ComplianceRun] = relationship(
-        back_populates="review_decisions"
-    )
+    compliance_run: Mapped[ComplianceRun] = relationship(back_populates="review_decisions")
