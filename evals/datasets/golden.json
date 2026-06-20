@@ -1,0 +1,2685 @@
+[
+  {
+    "id": "civic-0-compliant",
+    "scenario": "compliant",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2024,
+        "make": "Honda",
+        "model": "Civic",
+        "trim": "Sport",
+        "msrp": "27500",
+        "dealer_price": "26200",
+        "stock_number": "H24001",
+        "vin": "1HGCM82633A000001",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "26200",
+        "type": "lease",
+        "monthly_payment": "299",
+        "term_months": 36,
+        "due_at_signing": "2999",
+        "apr": "4.90"
+      }
+    },
+    "ad_copy": "2024 Honda Civic Sport!\nYours for $26,200.\nLease for $299/mo for 36 months, $2,999 due at signing.\n4.90% APR.\nStock #H24001.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nLessee is responsible for excess wear and mileage.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "26200",
+      "price_type": "unknown",
+      "apr": "4.90",
+      "lease_monthly_payment": "299",
+      "lease_term_months": 36,
+      "finance_monthly_payment": null,
+      "finance_term_months": null,
+      "due_at_signing": "2999",
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "Sport",
+      "stock_number_claimed": "H24001",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Lessee is responsible for excess wear and mileage.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "PASS",
+    "expected_blocker_rule_keys": [],
+    "notes": ""
+  },
+  {
+    "id": "civic-0-wrong_trim",
+    "scenario": "wrong_trim",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2024,
+        "make": "Honda",
+        "model": "Civic",
+        "trim": "Sport",
+        "msrp": "27500",
+        "dealer_price": "26200",
+        "stock_number": "H24001",
+        "vin": "1HGCM82633A000001",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "26200",
+        "type": "lease",
+        "monthly_payment": "299",
+        "term_months": 36,
+        "due_at_signing": "2999",
+        "apr": "4.90"
+      }
+    },
+    "ad_copy": "2024 Honda Civic Touring!\nYours for $26,200.\nLease for $299/mo for 36 months, $2,999 due at signing.\n4.90% APR.\nStock #H24001.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nLessee is responsible for excess wear and mileage.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "26200",
+      "price_type": "unknown",
+      "apr": "4.90",
+      "lease_monthly_payment": "299",
+      "lease_term_months": 36,
+      "finance_monthly_payment": null,
+      "finance_term_months": null,
+      "due_at_signing": "2999",
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "Touring",
+      "stock_number_claimed": "H24001",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Lessee is responsible for excess wear and mileage.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "FAIL",
+    "expected_blocker_rule_keys": [
+      "ADVERTISED_TRIM_MATCHES_SOURCE"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "civic-0-wrong_price",
+    "scenario": "wrong_price",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2024,
+        "make": "Honda",
+        "model": "Civic",
+        "trim": "Sport",
+        "msrp": "27500",
+        "dealer_price": "26200",
+        "stock_number": "H24001",
+        "vin": "1HGCM82633A000001",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "26200",
+        "type": "lease",
+        "monthly_payment": "299",
+        "term_months": 36,
+        "due_at_signing": "2999",
+        "apr": "4.90"
+      }
+    },
+    "ad_copy": "2024 Honda Civic Sport!\nYours for $24,200.\nLease for $299/mo for 36 months, $2,999 due at signing.\n4.90% APR.\nStock #H24001.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nLessee is responsible for excess wear and mileage.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "24200",
+      "price_type": "unknown",
+      "apr": "4.90",
+      "lease_monthly_payment": "299",
+      "lease_term_months": 36,
+      "finance_monthly_payment": null,
+      "finance_term_months": null,
+      "due_at_signing": "2999",
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "Sport",
+      "stock_number_claimed": "H24001",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Lessee is responsible for excess wear and mileage.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "FAIL",
+    "expected_blocker_rule_keys": [
+      "ADVERTISED_PRICE_MATCHES_SOURCE"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "civic-0-expired_offer",
+    "scenario": "expired_offer",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2024,
+        "make": "Honda",
+        "model": "Civic",
+        "trim": "Sport",
+        "msrp": "27500",
+        "dealer_price": "26200",
+        "stock_number": "H24001",
+        "vin": "1HGCM82633A000001",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "26200",
+        "type": "lease",
+        "monthly_payment": "299",
+        "term_months": 36,
+        "due_at_signing": "2999",
+        "apr": "4.90"
+      }
+    },
+    "ad_copy": "2024 Honda Civic Sport!\nYours for $26,200.\nLease for $299/mo for 36 months, $2,999 due at signing.\n4.90% APR.\nStock #H24001.\nOffer expires June 15, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nLessee is responsible for excess wear and mileage.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "26200",
+      "price_type": "unknown",
+      "apr": "4.90",
+      "lease_monthly_payment": "299",
+      "lease_term_months": 36,
+      "finance_monthly_payment": null,
+      "finance_term_months": null,
+      "due_at_signing": "2999",
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-06-15",
+      "trim_claimed": "Sport",
+      "stock_number_claimed": "H24001",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Lessee is responsible for excess wear and mileage.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "REQUIRES_REVIEW",
+    "expected_blocker_rule_keys": [],
+    "notes": ""
+  },
+  {
+    "id": "civic-0-missing_ca_stock_number",
+    "scenario": "missing_ca_stock_number",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2024,
+        "make": "Honda",
+        "model": "Civic",
+        "trim": "Sport",
+        "msrp": "27500",
+        "dealer_price": "26200",
+        "stock_number": "H24001",
+        "vin": "1HGCM82633A000001",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "26200",
+        "type": "lease",
+        "monthly_payment": "299",
+        "term_months": 36,
+        "due_at_signing": "2999",
+        "apr": "4.90"
+      }
+    },
+    "ad_copy": "2024 Honda Civic Sport!\nYours for $26,200.\nLease for $299/mo for 36 months, $2,999 due at signing.\n4.90% APR.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nLessee is responsible for excess wear and mileage.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "26200",
+      "price_type": "unknown",
+      "apr": "4.90",
+      "lease_monthly_payment": "299",
+      "lease_term_months": 36,
+      "finance_monthly_payment": null,
+      "finance_term_months": null,
+      "due_at_signing": "2999",
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "Sport",
+      "stock_number_claimed": null,
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Lessee is responsible for excess wear and mileage.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "FAIL",
+    "expected_blocker_rule_keys": [
+      "CA_SPECIFIC_VEHICLE_IDENTIFIER_REQUIRED"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "civic-0-wrong_apr",
+    "scenario": "wrong_apr",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2024,
+        "make": "Honda",
+        "model": "Civic",
+        "trim": "Sport",
+        "msrp": "27500",
+        "dealer_price": "26200",
+        "stock_number": "H24001",
+        "vin": "1HGCM82633A000001",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "26200",
+        "type": "lease",
+        "monthly_payment": "299",
+        "term_months": 36,
+        "due_at_signing": "2999",
+        "apr": "4.90"
+      }
+    },
+    "ad_copy": "2024 Honda Civic Sport!\nYours for $26,200.\nLease for $299/mo for 36 months, $2,999 due at signing.\n6.90% APR.\nStock #H24001.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nLessee is responsible for excess wear and mileage.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "26200",
+      "price_type": "unknown",
+      "apr": "6.90",
+      "lease_monthly_payment": "299",
+      "lease_term_months": 36,
+      "finance_monthly_payment": null,
+      "finance_term_months": null,
+      "due_at_signing": "2999",
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "Sport",
+      "stock_number_claimed": "H24001",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Lessee is responsible for excess wear and mileage.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "FAIL",
+    "expected_blocker_rule_keys": [
+      "ADVERTISED_APR_MATCHES_SOURCE"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "civic-0-missing_oem_disclaimer",
+    "scenario": "missing_oem_disclaimer",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2024,
+        "make": "Honda",
+        "model": "Civic",
+        "trim": "Sport",
+        "msrp": "27500",
+        "dealer_price": "26200",
+        "stock_number": "H24001",
+        "vin": "1HGCM82633A000001",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "26200",
+        "type": "lease",
+        "monthly_payment": "299",
+        "term_months": 36,
+        "due_at_signing": "2999",
+        "apr": "4.90"
+      }
+    },
+    "ad_copy": "2024 Honda Civic Sport!\nYours for $26,200.\nLease for $299/mo for 36 months, $2,999 due at signing.\n4.90% APR.\nStock #H24001.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nLessee is responsible for excess wear and mileage.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "26200",
+      "price_type": "unknown",
+      "apr": "4.90",
+      "lease_monthly_payment": "299",
+      "lease_term_months": 36,
+      "finance_monthly_payment": null,
+      "finance_term_months": null,
+      "due_at_signing": "2999",
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "Sport",
+      "stock_number_claimed": "H24001",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "Lessee is responsible for excess wear and mileage.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "REQUIRES_REVIEW",
+    "expected_blocker_rule_keys": [],
+    "notes": ""
+  },
+  {
+    "id": "civic-0-missing_lease_disclosure",
+    "scenario": "missing_lease_disclosure",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2024,
+        "make": "Honda",
+        "model": "Civic",
+        "trim": "Sport",
+        "msrp": "27500",
+        "dealer_price": "26200",
+        "stock_number": "H24001",
+        "vin": "1HGCM82633A000001",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "26200",
+        "type": "lease",
+        "monthly_payment": "299",
+        "term_months": 36,
+        "due_at_signing": "2999",
+        "apr": "4.90"
+      }
+    },
+    "ad_copy": "2024 Honda Civic Sport!\nYours for $26,200.\nLease for $299/mo.\n4.90% APR.\nStock #H24001.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "26200",
+      "price_type": "unknown",
+      "apr": "4.90",
+      "lease_monthly_payment": "299",
+      "lease_term_months": null,
+      "finance_monthly_payment": null,
+      "finance_term_months": null,
+      "due_at_signing": null,
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "Sport",
+      "stock_number_claimed": "H24001",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "FAIL",
+    "expected_blocker_rule_keys": [
+      "LEASE_DISCLOSURE_REQUIRED"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "accord-1-compliant",
+    "scenario": "compliant",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2024,
+        "make": "Honda",
+        "model": "Accord",
+        "trim": "EX-L",
+        "msrp": "34100",
+        "dealer_price": "32750",
+        "stock_number": "H24002",
+        "vin": "1HGCM82633A000002",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "32750",
+        "type": "lease",
+        "monthly_payment": "389",
+        "term_months": 39,
+        "due_at_signing": "3499",
+        "apr": "5.10"
+      }
+    },
+    "ad_copy": "2024 Honda Accord EX-L!\nYours for $32,750.\nLease for $389/mo for 39 months, $3,499 due at signing.\n5.10% APR.\nStock #H24002.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nLessee is responsible for excess wear and mileage.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "32750",
+      "price_type": "unknown",
+      "apr": "5.10",
+      "lease_monthly_payment": "389",
+      "lease_term_months": 39,
+      "finance_monthly_payment": null,
+      "finance_term_months": null,
+      "due_at_signing": "3499",
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "EX-L",
+      "stock_number_claimed": "H24002",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Lessee is responsible for excess wear and mileage.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "PASS",
+    "expected_blocker_rule_keys": [],
+    "notes": ""
+  },
+  {
+    "id": "accord-1-wrong_trim",
+    "scenario": "wrong_trim",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2024,
+        "make": "Honda",
+        "model": "Accord",
+        "trim": "EX-L",
+        "msrp": "34100",
+        "dealer_price": "32750",
+        "stock_number": "H24002",
+        "vin": "1HGCM82633A000002",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "32750",
+        "type": "lease",
+        "monthly_payment": "389",
+        "term_months": 39,
+        "due_at_signing": "3499",
+        "apr": "5.10"
+      }
+    },
+    "ad_copy": "2024 Honda Accord Touring!\nYours for $32,750.\nLease for $389/mo for 39 months, $3,499 due at signing.\n5.10% APR.\nStock #H24002.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nLessee is responsible for excess wear and mileage.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "32750",
+      "price_type": "unknown",
+      "apr": "5.10",
+      "lease_monthly_payment": "389",
+      "lease_term_months": 39,
+      "finance_monthly_payment": null,
+      "finance_term_months": null,
+      "due_at_signing": "3499",
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "Touring",
+      "stock_number_claimed": "H24002",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Lessee is responsible for excess wear and mileage.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "FAIL",
+    "expected_blocker_rule_keys": [
+      "ADVERTISED_TRIM_MATCHES_SOURCE"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "accord-1-wrong_price",
+    "scenario": "wrong_price",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2024,
+        "make": "Honda",
+        "model": "Accord",
+        "trim": "EX-L",
+        "msrp": "34100",
+        "dealer_price": "32750",
+        "stock_number": "H24002",
+        "vin": "1HGCM82633A000002",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "32750",
+        "type": "lease",
+        "monthly_payment": "389",
+        "term_months": 39,
+        "due_at_signing": "3499",
+        "apr": "5.10"
+      }
+    },
+    "ad_copy": "2024 Honda Accord EX-L!\nYours for $30,750.\nLease for $389/mo for 39 months, $3,499 due at signing.\n5.10% APR.\nStock #H24002.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nLessee is responsible for excess wear and mileage.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "30750",
+      "price_type": "unknown",
+      "apr": "5.10",
+      "lease_monthly_payment": "389",
+      "lease_term_months": 39,
+      "finance_monthly_payment": null,
+      "finance_term_months": null,
+      "due_at_signing": "3499",
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "EX-L",
+      "stock_number_claimed": "H24002",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Lessee is responsible for excess wear and mileage.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "FAIL",
+    "expected_blocker_rule_keys": [
+      "ADVERTISED_PRICE_MATCHES_SOURCE"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "accord-1-expired_offer",
+    "scenario": "expired_offer",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2024,
+        "make": "Honda",
+        "model": "Accord",
+        "trim": "EX-L",
+        "msrp": "34100",
+        "dealer_price": "32750",
+        "stock_number": "H24002",
+        "vin": "1HGCM82633A000002",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "32750",
+        "type": "lease",
+        "monthly_payment": "389",
+        "term_months": 39,
+        "due_at_signing": "3499",
+        "apr": "5.10"
+      }
+    },
+    "ad_copy": "2024 Honda Accord EX-L!\nYours for $32,750.\nLease for $389/mo for 39 months, $3,499 due at signing.\n5.10% APR.\nStock #H24002.\nOffer expires June 15, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nLessee is responsible for excess wear and mileage.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "32750",
+      "price_type": "unknown",
+      "apr": "5.10",
+      "lease_monthly_payment": "389",
+      "lease_term_months": 39,
+      "finance_monthly_payment": null,
+      "finance_term_months": null,
+      "due_at_signing": "3499",
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-06-15",
+      "trim_claimed": "EX-L",
+      "stock_number_claimed": "H24002",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Lessee is responsible for excess wear and mileage.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "REQUIRES_REVIEW",
+    "expected_blocker_rule_keys": [],
+    "notes": ""
+  },
+  {
+    "id": "accord-1-missing_ca_stock_number",
+    "scenario": "missing_ca_stock_number",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2024,
+        "make": "Honda",
+        "model": "Accord",
+        "trim": "EX-L",
+        "msrp": "34100",
+        "dealer_price": "32750",
+        "stock_number": "H24002",
+        "vin": "1HGCM82633A000002",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "32750",
+        "type": "lease",
+        "monthly_payment": "389",
+        "term_months": 39,
+        "due_at_signing": "3499",
+        "apr": "5.10"
+      }
+    },
+    "ad_copy": "2024 Honda Accord EX-L!\nYours for $32,750.\nLease for $389/mo for 39 months, $3,499 due at signing.\n5.10% APR.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nLessee is responsible for excess wear and mileage.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "32750",
+      "price_type": "unknown",
+      "apr": "5.10",
+      "lease_monthly_payment": "389",
+      "lease_term_months": 39,
+      "finance_monthly_payment": null,
+      "finance_term_months": null,
+      "due_at_signing": "3499",
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "EX-L",
+      "stock_number_claimed": null,
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Lessee is responsible for excess wear and mileage.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "FAIL",
+    "expected_blocker_rule_keys": [
+      "CA_SPECIFIC_VEHICLE_IDENTIFIER_REQUIRED"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "accord-1-wrong_apr",
+    "scenario": "wrong_apr",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2024,
+        "make": "Honda",
+        "model": "Accord",
+        "trim": "EX-L",
+        "msrp": "34100",
+        "dealer_price": "32750",
+        "stock_number": "H24002",
+        "vin": "1HGCM82633A000002",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "32750",
+        "type": "lease",
+        "monthly_payment": "389",
+        "term_months": 39,
+        "due_at_signing": "3499",
+        "apr": "5.10"
+      }
+    },
+    "ad_copy": "2024 Honda Accord EX-L!\nYours for $32,750.\nLease for $389/mo for 39 months, $3,499 due at signing.\n7.10% APR.\nStock #H24002.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nLessee is responsible for excess wear and mileage.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "32750",
+      "price_type": "unknown",
+      "apr": "7.10",
+      "lease_monthly_payment": "389",
+      "lease_term_months": 39,
+      "finance_monthly_payment": null,
+      "finance_term_months": null,
+      "due_at_signing": "3499",
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "EX-L",
+      "stock_number_claimed": "H24002",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Lessee is responsible for excess wear and mileage.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "FAIL",
+    "expected_blocker_rule_keys": [
+      "ADVERTISED_APR_MATCHES_SOURCE"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "accord-1-missing_oem_disclaimer",
+    "scenario": "missing_oem_disclaimer",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2024,
+        "make": "Honda",
+        "model": "Accord",
+        "trim": "EX-L",
+        "msrp": "34100",
+        "dealer_price": "32750",
+        "stock_number": "H24002",
+        "vin": "1HGCM82633A000002",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "32750",
+        "type": "lease",
+        "monthly_payment": "389",
+        "term_months": 39,
+        "due_at_signing": "3499",
+        "apr": "5.10"
+      }
+    },
+    "ad_copy": "2024 Honda Accord EX-L!\nYours for $32,750.\nLease for $389/mo for 39 months, $3,499 due at signing.\n5.10% APR.\nStock #H24002.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nLessee is responsible for excess wear and mileage.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "32750",
+      "price_type": "unknown",
+      "apr": "5.10",
+      "lease_monthly_payment": "389",
+      "lease_term_months": 39,
+      "finance_monthly_payment": null,
+      "finance_term_months": null,
+      "due_at_signing": "3499",
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "EX-L",
+      "stock_number_claimed": "H24002",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "Lessee is responsible for excess wear and mileage.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "REQUIRES_REVIEW",
+    "expected_blocker_rule_keys": [],
+    "notes": ""
+  },
+  {
+    "id": "accord-1-missing_lease_disclosure",
+    "scenario": "missing_lease_disclosure",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2024,
+        "make": "Honda",
+        "model": "Accord",
+        "trim": "EX-L",
+        "msrp": "34100",
+        "dealer_price": "32750",
+        "stock_number": "H24002",
+        "vin": "1HGCM82633A000002",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "32750",
+        "type": "lease",
+        "monthly_payment": "389",
+        "term_months": 39,
+        "due_at_signing": "3499",
+        "apr": "5.10"
+      }
+    },
+    "ad_copy": "2024 Honda Accord EX-L!\nYours for $32,750.\nLease for $389/mo.\n5.10% APR.\nStock #H24002.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "32750",
+      "price_type": "unknown",
+      "apr": "5.10",
+      "lease_monthly_payment": "389",
+      "lease_term_months": null,
+      "finance_monthly_payment": null,
+      "finance_term_months": null,
+      "due_at_signing": null,
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "EX-L",
+      "stock_number_claimed": "H24002",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "FAIL",
+    "expected_blocker_rule_keys": [
+      "LEASE_DISCLOSURE_REQUIRED"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "cr-v-2-compliant",
+    "scenario": "compliant",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2025,
+        "make": "Honda",
+        "model": "CR-V",
+        "trim": "EX",
+        "msrp": "33200",
+        "dealer_price": "31900",
+        "stock_number": "H25003",
+        "vin": "1HGCM82633A000003",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "31900",
+        "type": "lease",
+        "monthly_payment": "345",
+        "term_months": 36,
+        "due_at_signing": "3199",
+        "apr": "4.50"
+      }
+    },
+    "ad_copy": "2025 Honda CR-V EX!\nYours for $31,900.\nLease for $345/mo for 36 months, $3,199 due at signing.\n4.50% APR.\nStock #H25003.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nLessee is responsible for excess wear and mileage.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "31900",
+      "price_type": "unknown",
+      "apr": "4.50",
+      "lease_monthly_payment": "345",
+      "lease_term_months": 36,
+      "finance_monthly_payment": null,
+      "finance_term_months": null,
+      "due_at_signing": "3199",
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "EX",
+      "stock_number_claimed": "H25003",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Lessee is responsible for excess wear and mileage.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "PASS",
+    "expected_blocker_rule_keys": [],
+    "notes": ""
+  },
+  {
+    "id": "cr-v-2-wrong_trim",
+    "scenario": "wrong_trim",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2025,
+        "make": "Honda",
+        "model": "CR-V",
+        "trim": "EX",
+        "msrp": "33200",
+        "dealer_price": "31900",
+        "stock_number": "H25003",
+        "vin": "1HGCM82633A000003",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "31900",
+        "type": "lease",
+        "monthly_payment": "345",
+        "term_months": 36,
+        "due_at_signing": "3199",
+        "apr": "4.50"
+      }
+    },
+    "ad_copy": "2025 Honda CR-V Touring!\nYours for $31,900.\nLease for $345/mo for 36 months, $3,199 due at signing.\n4.50% APR.\nStock #H25003.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nLessee is responsible for excess wear and mileage.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "31900",
+      "price_type": "unknown",
+      "apr": "4.50",
+      "lease_monthly_payment": "345",
+      "lease_term_months": 36,
+      "finance_monthly_payment": null,
+      "finance_term_months": null,
+      "due_at_signing": "3199",
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "Touring",
+      "stock_number_claimed": "H25003",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Lessee is responsible for excess wear and mileage.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "FAIL",
+    "expected_blocker_rule_keys": [
+      "ADVERTISED_TRIM_MATCHES_SOURCE"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "cr-v-2-wrong_price",
+    "scenario": "wrong_price",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2025,
+        "make": "Honda",
+        "model": "CR-V",
+        "trim": "EX",
+        "msrp": "33200",
+        "dealer_price": "31900",
+        "stock_number": "H25003",
+        "vin": "1HGCM82633A000003",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "31900",
+        "type": "lease",
+        "monthly_payment": "345",
+        "term_months": 36,
+        "due_at_signing": "3199",
+        "apr": "4.50"
+      }
+    },
+    "ad_copy": "2025 Honda CR-V EX!\nYours for $29,900.\nLease for $345/mo for 36 months, $3,199 due at signing.\n4.50% APR.\nStock #H25003.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nLessee is responsible for excess wear and mileage.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "29900",
+      "price_type": "unknown",
+      "apr": "4.50",
+      "lease_monthly_payment": "345",
+      "lease_term_months": 36,
+      "finance_monthly_payment": null,
+      "finance_term_months": null,
+      "due_at_signing": "3199",
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "EX",
+      "stock_number_claimed": "H25003",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Lessee is responsible for excess wear and mileage.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "FAIL",
+    "expected_blocker_rule_keys": [
+      "ADVERTISED_PRICE_MATCHES_SOURCE"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "cr-v-2-expired_offer",
+    "scenario": "expired_offer",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2025,
+        "make": "Honda",
+        "model": "CR-V",
+        "trim": "EX",
+        "msrp": "33200",
+        "dealer_price": "31900",
+        "stock_number": "H25003",
+        "vin": "1HGCM82633A000003",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "31900",
+        "type": "lease",
+        "monthly_payment": "345",
+        "term_months": 36,
+        "due_at_signing": "3199",
+        "apr": "4.50"
+      }
+    },
+    "ad_copy": "2025 Honda CR-V EX!\nYours for $31,900.\nLease for $345/mo for 36 months, $3,199 due at signing.\n4.50% APR.\nStock #H25003.\nOffer expires June 15, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nLessee is responsible for excess wear and mileage.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "31900",
+      "price_type": "unknown",
+      "apr": "4.50",
+      "lease_monthly_payment": "345",
+      "lease_term_months": 36,
+      "finance_monthly_payment": null,
+      "finance_term_months": null,
+      "due_at_signing": "3199",
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-06-15",
+      "trim_claimed": "EX",
+      "stock_number_claimed": "H25003",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Lessee is responsible for excess wear and mileage.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "REQUIRES_REVIEW",
+    "expected_blocker_rule_keys": [],
+    "notes": ""
+  },
+  {
+    "id": "cr-v-2-missing_ca_stock_number",
+    "scenario": "missing_ca_stock_number",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2025,
+        "make": "Honda",
+        "model": "CR-V",
+        "trim": "EX",
+        "msrp": "33200",
+        "dealer_price": "31900",
+        "stock_number": "H25003",
+        "vin": "1HGCM82633A000003",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "31900",
+        "type": "lease",
+        "monthly_payment": "345",
+        "term_months": 36,
+        "due_at_signing": "3199",
+        "apr": "4.50"
+      }
+    },
+    "ad_copy": "2025 Honda CR-V EX!\nYours for $31,900.\nLease for $345/mo for 36 months, $3,199 due at signing.\n4.50% APR.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nLessee is responsible for excess wear and mileage.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "31900",
+      "price_type": "unknown",
+      "apr": "4.50",
+      "lease_monthly_payment": "345",
+      "lease_term_months": 36,
+      "finance_monthly_payment": null,
+      "finance_term_months": null,
+      "due_at_signing": "3199",
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "EX",
+      "stock_number_claimed": null,
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Lessee is responsible for excess wear and mileage.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "FAIL",
+    "expected_blocker_rule_keys": [
+      "CA_SPECIFIC_VEHICLE_IDENTIFIER_REQUIRED"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "cr-v-2-wrong_apr",
+    "scenario": "wrong_apr",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2025,
+        "make": "Honda",
+        "model": "CR-V",
+        "trim": "EX",
+        "msrp": "33200",
+        "dealer_price": "31900",
+        "stock_number": "H25003",
+        "vin": "1HGCM82633A000003",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "31900",
+        "type": "lease",
+        "monthly_payment": "345",
+        "term_months": 36,
+        "due_at_signing": "3199",
+        "apr": "4.50"
+      }
+    },
+    "ad_copy": "2025 Honda CR-V EX!\nYours for $31,900.\nLease for $345/mo for 36 months, $3,199 due at signing.\n6.50% APR.\nStock #H25003.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nLessee is responsible for excess wear and mileage.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "31900",
+      "price_type": "unknown",
+      "apr": "6.50",
+      "lease_monthly_payment": "345",
+      "lease_term_months": 36,
+      "finance_monthly_payment": null,
+      "finance_term_months": null,
+      "due_at_signing": "3199",
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "EX",
+      "stock_number_claimed": "H25003",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Lessee is responsible for excess wear and mileage.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "FAIL",
+    "expected_blocker_rule_keys": [
+      "ADVERTISED_APR_MATCHES_SOURCE"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "cr-v-2-missing_oem_disclaimer",
+    "scenario": "missing_oem_disclaimer",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2025,
+        "make": "Honda",
+        "model": "CR-V",
+        "trim": "EX",
+        "msrp": "33200",
+        "dealer_price": "31900",
+        "stock_number": "H25003",
+        "vin": "1HGCM82633A000003",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "31900",
+        "type": "lease",
+        "monthly_payment": "345",
+        "term_months": 36,
+        "due_at_signing": "3199",
+        "apr": "4.50"
+      }
+    },
+    "ad_copy": "2025 Honda CR-V EX!\nYours for $31,900.\nLease for $345/mo for 36 months, $3,199 due at signing.\n4.50% APR.\nStock #H25003.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nLessee is responsible for excess wear and mileage.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "31900",
+      "price_type": "unknown",
+      "apr": "4.50",
+      "lease_monthly_payment": "345",
+      "lease_term_months": 36,
+      "finance_monthly_payment": null,
+      "finance_term_months": null,
+      "due_at_signing": "3199",
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "EX",
+      "stock_number_claimed": "H25003",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "Lessee is responsible for excess wear and mileage.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "REQUIRES_REVIEW",
+    "expected_blocker_rule_keys": [],
+    "notes": ""
+  },
+  {
+    "id": "cr-v-2-missing_lease_disclosure",
+    "scenario": "missing_lease_disclosure",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2025,
+        "make": "Honda",
+        "model": "CR-V",
+        "trim": "EX",
+        "msrp": "33200",
+        "dealer_price": "31900",
+        "stock_number": "H25003",
+        "vin": "1HGCM82633A000003",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "31900",
+        "type": "lease",
+        "monthly_payment": "345",
+        "term_months": 36,
+        "due_at_signing": "3199",
+        "apr": "4.50"
+      }
+    },
+    "ad_copy": "2025 Honda CR-V EX!\nYours for $31,900.\nLease for $345/mo.\n4.50% APR.\nStock #H25003.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "31900",
+      "price_type": "unknown",
+      "apr": "4.50",
+      "lease_monthly_payment": "345",
+      "lease_term_months": null,
+      "finance_monthly_payment": null,
+      "finance_term_months": null,
+      "due_at_signing": null,
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "EX",
+      "stock_number_claimed": "H25003",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "FAIL",
+    "expected_blocker_rule_keys": [
+      "LEASE_DISCLOSURE_REQUIRED"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "pilot-3-compliant",
+    "scenario": "compliant",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2024,
+        "make": "Honda",
+        "model": "Pilot",
+        "trim": "Touring",
+        "msrp": "48900",
+        "dealer_price": "46500",
+        "stock_number": "H24004",
+        "vin": "1HGCM82633A000004",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "46500",
+        "type": "finance",
+        "monthly_payment": "689",
+        "term_months": 60,
+        "down_payment": "4000",
+        "apr": "3.90"
+      }
+    },
+    "ad_copy": "2024 Honda Pilot Touring!\nYours for $46,500.\nFinance for $689/mo for 60 months with $4,000 down.\n3.90% APR.\nStock #H24004.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "46500",
+      "price_type": "unknown",
+      "apr": "3.90",
+      "lease_monthly_payment": null,
+      "lease_term_months": null,
+      "finance_monthly_payment": "689",
+      "finance_term_months": 60,
+      "due_at_signing": null,
+      "down_payment": "4000",
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "Touring",
+      "stock_number_claimed": "H24004",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "PASS",
+    "expected_blocker_rule_keys": [],
+    "notes": ""
+  },
+  {
+    "id": "pilot-3-wrong_trim",
+    "scenario": "wrong_trim",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2024,
+        "make": "Honda",
+        "model": "Pilot",
+        "trim": "Touring",
+        "msrp": "48900",
+        "dealer_price": "46500",
+        "stock_number": "H24004",
+        "vin": "1HGCM82633A000004",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "46500",
+        "type": "finance",
+        "monthly_payment": "689",
+        "term_months": 60,
+        "down_payment": "4000",
+        "apr": "3.90"
+      }
+    },
+    "ad_copy": "2024 Honda Pilot Sport!\nYours for $46,500.\nFinance for $689/mo for 60 months with $4,000 down.\n3.90% APR.\nStock #H24004.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "46500",
+      "price_type": "unknown",
+      "apr": "3.90",
+      "lease_monthly_payment": null,
+      "lease_term_months": null,
+      "finance_monthly_payment": "689",
+      "finance_term_months": 60,
+      "due_at_signing": null,
+      "down_payment": "4000",
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "Sport",
+      "stock_number_claimed": "H24004",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "FAIL",
+    "expected_blocker_rule_keys": [
+      "ADVERTISED_TRIM_MATCHES_SOURCE"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "pilot-3-wrong_price",
+    "scenario": "wrong_price",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2024,
+        "make": "Honda",
+        "model": "Pilot",
+        "trim": "Touring",
+        "msrp": "48900",
+        "dealer_price": "46500",
+        "stock_number": "H24004",
+        "vin": "1HGCM82633A000004",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "46500",
+        "type": "finance",
+        "monthly_payment": "689",
+        "term_months": 60,
+        "down_payment": "4000",
+        "apr": "3.90"
+      }
+    },
+    "ad_copy": "2024 Honda Pilot Touring!\nYours for $44,500.\nFinance for $689/mo for 60 months with $4,000 down.\n3.90% APR.\nStock #H24004.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "44500",
+      "price_type": "unknown",
+      "apr": "3.90",
+      "lease_monthly_payment": null,
+      "lease_term_months": null,
+      "finance_monthly_payment": "689",
+      "finance_term_months": 60,
+      "due_at_signing": null,
+      "down_payment": "4000",
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "Touring",
+      "stock_number_claimed": "H24004",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "FAIL",
+    "expected_blocker_rule_keys": [
+      "ADVERTISED_PRICE_MATCHES_SOURCE"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "pilot-3-expired_offer",
+    "scenario": "expired_offer",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2024,
+        "make": "Honda",
+        "model": "Pilot",
+        "trim": "Touring",
+        "msrp": "48900",
+        "dealer_price": "46500",
+        "stock_number": "H24004",
+        "vin": "1HGCM82633A000004",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "46500",
+        "type": "finance",
+        "monthly_payment": "689",
+        "term_months": 60,
+        "down_payment": "4000",
+        "apr": "3.90"
+      }
+    },
+    "ad_copy": "2024 Honda Pilot Touring!\nYours for $46,500.\nFinance for $689/mo for 60 months with $4,000 down.\n3.90% APR.\nStock #H24004.\nOffer expires June 15, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "46500",
+      "price_type": "unknown",
+      "apr": "3.90",
+      "lease_monthly_payment": null,
+      "lease_term_months": null,
+      "finance_monthly_payment": "689",
+      "finance_term_months": 60,
+      "due_at_signing": null,
+      "down_payment": "4000",
+      "total_of_payments": null,
+      "expiration_date": "2026-06-15",
+      "trim_claimed": "Touring",
+      "stock_number_claimed": "H24004",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "REQUIRES_REVIEW",
+    "expected_blocker_rule_keys": [],
+    "notes": ""
+  },
+  {
+    "id": "pilot-3-missing_ca_stock_number",
+    "scenario": "missing_ca_stock_number",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2024,
+        "make": "Honda",
+        "model": "Pilot",
+        "trim": "Touring",
+        "msrp": "48900",
+        "dealer_price": "46500",
+        "stock_number": "H24004",
+        "vin": "1HGCM82633A000004",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "46500",
+        "type": "finance",
+        "monthly_payment": "689",
+        "term_months": 60,
+        "down_payment": "4000",
+        "apr": "3.90"
+      }
+    },
+    "ad_copy": "2024 Honda Pilot Touring!\nYours for $46,500.\nFinance for $689/mo for 60 months with $4,000 down.\n3.90% APR.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "46500",
+      "price_type": "unknown",
+      "apr": "3.90",
+      "lease_monthly_payment": null,
+      "lease_term_months": null,
+      "finance_monthly_payment": "689",
+      "finance_term_months": 60,
+      "due_at_signing": null,
+      "down_payment": "4000",
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "Touring",
+      "stock_number_claimed": null,
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "FAIL",
+    "expected_blocker_rule_keys": [
+      "CA_SPECIFIC_VEHICLE_IDENTIFIER_REQUIRED"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "pilot-3-wrong_apr",
+    "scenario": "wrong_apr",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2024,
+        "make": "Honda",
+        "model": "Pilot",
+        "trim": "Touring",
+        "msrp": "48900",
+        "dealer_price": "46500",
+        "stock_number": "H24004",
+        "vin": "1HGCM82633A000004",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "46500",
+        "type": "finance",
+        "monthly_payment": "689",
+        "term_months": 60,
+        "down_payment": "4000",
+        "apr": "3.90"
+      }
+    },
+    "ad_copy": "2024 Honda Pilot Touring!\nYours for $46,500.\nFinance for $689/mo for 60 months with $4,000 down.\n5.90% APR.\nStock #H24004.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "46500",
+      "price_type": "unknown",
+      "apr": "5.90",
+      "lease_monthly_payment": null,
+      "lease_term_months": null,
+      "finance_monthly_payment": "689",
+      "finance_term_months": 60,
+      "due_at_signing": null,
+      "down_payment": "4000",
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "Touring",
+      "stock_number_claimed": "H24004",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "FAIL",
+    "expected_blocker_rule_keys": [
+      "ADVERTISED_APR_MATCHES_SOURCE"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "pilot-3-missing_oem_disclaimer",
+    "scenario": "missing_oem_disclaimer",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2024,
+        "make": "Honda",
+        "model": "Pilot",
+        "trim": "Touring",
+        "msrp": "48900",
+        "dealer_price": "46500",
+        "stock_number": "H24004",
+        "vin": "1HGCM82633A000004",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "46500",
+        "type": "finance",
+        "monthly_payment": "689",
+        "term_months": 60,
+        "down_payment": "4000",
+        "apr": "3.90"
+      }
+    },
+    "ad_copy": "2024 Honda Pilot Touring!\nYours for $46,500.\nFinance for $689/mo for 60 months with $4,000 down.\n3.90% APR.\nStock #H24004.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "46500",
+      "price_type": "unknown",
+      "apr": "3.90",
+      "lease_monthly_payment": null,
+      "lease_term_months": null,
+      "finance_monthly_payment": "689",
+      "finance_term_months": 60,
+      "due_at_signing": null,
+      "down_payment": "4000",
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "Touring",
+      "stock_number_claimed": "H24004",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "REQUIRES_REVIEW",
+    "expected_blocker_rule_keys": [],
+    "notes": ""
+  },
+  {
+    "id": "pilot-3-missing_finance_disclosure",
+    "scenario": "missing_finance_disclosure",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2024,
+        "make": "Honda",
+        "model": "Pilot",
+        "trim": "Touring",
+        "msrp": "48900",
+        "dealer_price": "46500",
+        "stock_number": "H24004",
+        "vin": "1HGCM82633A000004",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "46500",
+        "type": "finance",
+        "monthly_payment": "689",
+        "term_months": 60,
+        "down_payment": "4000",
+        "apr": "3.90"
+      }
+    },
+    "ad_copy": "2024 Honda Pilot Touring!\nYours for $46,500.\nFinance for $689/mo.\nStock #H24004.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "46500",
+      "price_type": "unknown",
+      "apr": null,
+      "lease_monthly_payment": null,
+      "lease_term_months": null,
+      "finance_monthly_payment": "689",
+      "finance_term_months": null,
+      "due_at_signing": null,
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "Touring",
+      "stock_number_claimed": "H24004",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "FAIL",
+    "expected_blocker_rule_keys": [
+      "FINANCE_DISCLOSURE_REQUIRED"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "hr-v-4-compliant",
+    "scenario": "compliant",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2025,
+        "make": "Honda",
+        "model": "HR-V",
+        "trim": "LX",
+        "msrp": "26500",
+        "dealer_price": "25100",
+        "stock_number": "H25005",
+        "vin": "1HGCM82633A000005",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "25100",
+        "type": "finance",
+        "monthly_payment": "459",
+        "term_months": 60,
+        "down_payment": "2500",
+        "apr": "4.20"
+      }
+    },
+    "ad_copy": "2025 Honda HR-V LX!\nYours for $25,100.\nFinance for $459/mo for 60 months with $2,500 down.\n4.20% APR.\nStock #H25005.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "25100",
+      "price_type": "unknown",
+      "apr": "4.20",
+      "lease_monthly_payment": null,
+      "lease_term_months": null,
+      "finance_monthly_payment": "459",
+      "finance_term_months": 60,
+      "due_at_signing": null,
+      "down_payment": "2500",
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "LX",
+      "stock_number_claimed": "H25005",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "PASS",
+    "expected_blocker_rule_keys": [],
+    "notes": ""
+  },
+  {
+    "id": "hr-v-4-wrong_trim",
+    "scenario": "wrong_trim",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2025,
+        "make": "Honda",
+        "model": "HR-V",
+        "trim": "LX",
+        "msrp": "26500",
+        "dealer_price": "25100",
+        "stock_number": "H25005",
+        "vin": "1HGCM82633A000005",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "25100",
+        "type": "finance",
+        "monthly_payment": "459",
+        "term_months": 60,
+        "down_payment": "2500",
+        "apr": "4.20"
+      }
+    },
+    "ad_copy": "2025 Honda HR-V Touring!\nYours for $25,100.\nFinance for $459/mo for 60 months with $2,500 down.\n4.20% APR.\nStock #H25005.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "25100",
+      "price_type": "unknown",
+      "apr": "4.20",
+      "lease_monthly_payment": null,
+      "lease_term_months": null,
+      "finance_monthly_payment": "459",
+      "finance_term_months": 60,
+      "due_at_signing": null,
+      "down_payment": "2500",
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "Touring",
+      "stock_number_claimed": "H25005",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "FAIL",
+    "expected_blocker_rule_keys": [
+      "ADVERTISED_TRIM_MATCHES_SOURCE"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "hr-v-4-wrong_price",
+    "scenario": "wrong_price",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2025,
+        "make": "Honda",
+        "model": "HR-V",
+        "trim": "LX",
+        "msrp": "26500",
+        "dealer_price": "25100",
+        "stock_number": "H25005",
+        "vin": "1HGCM82633A000005",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "25100",
+        "type": "finance",
+        "monthly_payment": "459",
+        "term_months": 60,
+        "down_payment": "2500",
+        "apr": "4.20"
+      }
+    },
+    "ad_copy": "2025 Honda HR-V LX!\nYours for $23,100.\nFinance for $459/mo for 60 months with $2,500 down.\n4.20% APR.\nStock #H25005.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "23100",
+      "price_type": "unknown",
+      "apr": "4.20",
+      "lease_monthly_payment": null,
+      "lease_term_months": null,
+      "finance_monthly_payment": "459",
+      "finance_term_months": 60,
+      "due_at_signing": null,
+      "down_payment": "2500",
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "LX",
+      "stock_number_claimed": "H25005",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "FAIL",
+    "expected_blocker_rule_keys": [
+      "ADVERTISED_PRICE_MATCHES_SOURCE"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "hr-v-4-expired_offer",
+    "scenario": "expired_offer",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2025,
+        "make": "Honda",
+        "model": "HR-V",
+        "trim": "LX",
+        "msrp": "26500",
+        "dealer_price": "25100",
+        "stock_number": "H25005",
+        "vin": "1HGCM82633A000005",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "25100",
+        "type": "finance",
+        "monthly_payment": "459",
+        "term_months": 60,
+        "down_payment": "2500",
+        "apr": "4.20"
+      }
+    },
+    "ad_copy": "2025 Honda HR-V LX!\nYours for $25,100.\nFinance for $459/mo for 60 months with $2,500 down.\n4.20% APR.\nStock #H25005.\nOffer expires June 15, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "25100",
+      "price_type": "unknown",
+      "apr": "4.20",
+      "lease_monthly_payment": null,
+      "lease_term_months": null,
+      "finance_monthly_payment": "459",
+      "finance_term_months": 60,
+      "due_at_signing": null,
+      "down_payment": "2500",
+      "total_of_payments": null,
+      "expiration_date": "2026-06-15",
+      "trim_claimed": "LX",
+      "stock_number_claimed": "H25005",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "REQUIRES_REVIEW",
+    "expected_blocker_rule_keys": [],
+    "notes": ""
+  },
+  {
+    "id": "hr-v-4-missing_ca_stock_number",
+    "scenario": "missing_ca_stock_number",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2025,
+        "make": "Honda",
+        "model": "HR-V",
+        "trim": "LX",
+        "msrp": "26500",
+        "dealer_price": "25100",
+        "stock_number": "H25005",
+        "vin": "1HGCM82633A000005",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "25100",
+        "type": "finance",
+        "monthly_payment": "459",
+        "term_months": 60,
+        "down_payment": "2500",
+        "apr": "4.20"
+      }
+    },
+    "ad_copy": "2025 Honda HR-V LX!\nYours for $25,100.\nFinance for $459/mo for 60 months with $2,500 down.\n4.20% APR.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "25100",
+      "price_type": "unknown",
+      "apr": "4.20",
+      "lease_monthly_payment": null,
+      "lease_term_months": null,
+      "finance_monthly_payment": "459",
+      "finance_term_months": 60,
+      "due_at_signing": null,
+      "down_payment": "2500",
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "LX",
+      "stock_number_claimed": null,
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "FAIL",
+    "expected_blocker_rule_keys": [
+      "CA_SPECIFIC_VEHICLE_IDENTIFIER_REQUIRED"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "hr-v-4-wrong_apr",
+    "scenario": "wrong_apr",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2025,
+        "make": "Honda",
+        "model": "HR-V",
+        "trim": "LX",
+        "msrp": "26500",
+        "dealer_price": "25100",
+        "stock_number": "H25005",
+        "vin": "1HGCM82633A000005",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "25100",
+        "type": "finance",
+        "monthly_payment": "459",
+        "term_months": 60,
+        "down_payment": "2500",
+        "apr": "4.20"
+      }
+    },
+    "ad_copy": "2025 Honda HR-V LX!\nYours for $25,100.\nFinance for $459/mo for 60 months with $2,500 down.\n6.20% APR.\nStock #H25005.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "25100",
+      "price_type": "unknown",
+      "apr": "6.20",
+      "lease_monthly_payment": null,
+      "lease_term_months": null,
+      "finance_monthly_payment": "459",
+      "finance_term_months": 60,
+      "due_at_signing": null,
+      "down_payment": "2500",
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "LX",
+      "stock_number_claimed": "H25005",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "FAIL",
+    "expected_blocker_rule_keys": [
+      "ADVERTISED_APR_MATCHES_SOURCE"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "hr-v-4-missing_oem_disclaimer",
+    "scenario": "missing_oem_disclaimer",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2025,
+        "make": "Honda",
+        "model": "HR-V",
+        "trim": "LX",
+        "msrp": "26500",
+        "dealer_price": "25100",
+        "stock_number": "H25005",
+        "vin": "1HGCM82633A000005",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "25100",
+        "type": "finance",
+        "monthly_payment": "459",
+        "term_months": 60,
+        "down_payment": "2500",
+        "apr": "4.20"
+      }
+    },
+    "ad_copy": "2025 Honda HR-V LX!\nYours for $25,100.\nFinance for $459/mo for 60 months with $2,500 down.\n4.20% APR.\nStock #H25005.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "25100",
+      "price_type": "unknown",
+      "apr": "4.20",
+      "lease_monthly_payment": null,
+      "lease_term_months": null,
+      "finance_monthly_payment": "459",
+      "finance_term_months": 60,
+      "due_at_signing": null,
+      "down_payment": "2500",
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "LX",
+      "stock_number_claimed": "H25005",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "REQUIRES_REVIEW",
+    "expected_blocker_rule_keys": [],
+    "notes": ""
+  },
+  {
+    "id": "hr-v-4-missing_finance_disclosure",
+    "scenario": "missing_finance_disclosure",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2025,
+        "make": "Honda",
+        "model": "HR-V",
+        "trim": "LX",
+        "msrp": "26500",
+        "dealer_price": "25100",
+        "stock_number": "H25005",
+        "vin": "1HGCM82633A000005",
+        "condition": "new"
+      },
+      "offer": {
+        "effective_price": "25100",
+        "type": "finance",
+        "monthly_payment": "459",
+        "term_months": 60,
+        "down_payment": "2500",
+        "apr": "4.20"
+      }
+    },
+    "ad_copy": "2025 Honda HR-V LX!\nYours for $25,100.\nFinance for $459/mo.\nStock #H25005.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.\nFinancing available for well-qualified buyers.",
+    "true_claims": {
+      "advertised_price": "25100",
+      "price_type": "unknown",
+      "apr": null,
+      "lease_monthly_payment": null,
+      "lease_term_months": null,
+      "finance_monthly_payment": "459",
+      "finance_term_months": null,
+      "due_at_signing": null,
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "LX",
+      "stock_number_claimed": "H25005",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details.",
+        "Financing available for well-qualified buyers."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "FAIL",
+    "expected_blocker_rule_keys": [
+      "FINANCE_DISCLOSURE_REQUIRED"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "passport-5-compliant",
+    "scenario": "compliant",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2023,
+        "make": "Honda",
+        "model": "Passport",
+        "trim": "EX-L",
+        "msrp": "43000",
+        "dealer_price": "39950",
+        "stock_number": "H23006",
+        "vin": "1HGCM82633A000006",
+        "condition": "certified"
+      },
+      "offer": {
+        "effective_price": "39950",
+        "type": "cash"
+      }
+    },
+    "ad_copy": "2023 Honda Passport EX-L!\nYours for $39,950.\nStock #H23006.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.",
+    "true_claims": {
+      "advertised_price": "39950",
+      "price_type": "unknown",
+      "apr": null,
+      "lease_monthly_payment": null,
+      "lease_term_months": null,
+      "finance_monthly_payment": null,
+      "finance_term_months": null,
+      "due_at_signing": null,
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "EX-L",
+      "stock_number_claimed": "H23006",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "PASS",
+    "expected_blocker_rule_keys": [],
+    "notes": ""
+  },
+  {
+    "id": "passport-5-wrong_trim",
+    "scenario": "wrong_trim",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2023,
+        "make": "Honda",
+        "model": "Passport",
+        "trim": "EX-L",
+        "msrp": "43000",
+        "dealer_price": "39950",
+        "stock_number": "H23006",
+        "vin": "1HGCM82633A000006",
+        "condition": "certified"
+      },
+      "offer": {
+        "effective_price": "39950",
+        "type": "cash"
+      }
+    },
+    "ad_copy": "2023 Honda Passport Touring!\nYours for $39,950.\nStock #H23006.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.",
+    "true_claims": {
+      "advertised_price": "39950",
+      "price_type": "unknown",
+      "apr": null,
+      "lease_monthly_payment": null,
+      "lease_term_months": null,
+      "finance_monthly_payment": null,
+      "finance_term_months": null,
+      "due_at_signing": null,
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "Touring",
+      "stock_number_claimed": "H23006",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "FAIL",
+    "expected_blocker_rule_keys": [
+      "ADVERTISED_TRIM_MATCHES_SOURCE"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "passport-5-wrong_price",
+    "scenario": "wrong_price",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2023,
+        "make": "Honda",
+        "model": "Passport",
+        "trim": "EX-L",
+        "msrp": "43000",
+        "dealer_price": "39950",
+        "stock_number": "H23006",
+        "vin": "1HGCM82633A000006",
+        "condition": "certified"
+      },
+      "offer": {
+        "effective_price": "39950",
+        "type": "cash"
+      }
+    },
+    "ad_copy": "2023 Honda Passport EX-L!\nYours for $37,950.\nStock #H23006.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.",
+    "true_claims": {
+      "advertised_price": "37950",
+      "price_type": "unknown",
+      "apr": null,
+      "lease_monthly_payment": null,
+      "lease_term_months": null,
+      "finance_monthly_payment": null,
+      "finance_term_months": null,
+      "due_at_signing": null,
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "EX-L",
+      "stock_number_claimed": "H23006",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "FAIL",
+    "expected_blocker_rule_keys": [
+      "ADVERTISED_PRICE_MATCHES_SOURCE"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "passport-5-expired_offer",
+    "scenario": "expired_offer",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2023,
+        "make": "Honda",
+        "model": "Passport",
+        "trim": "EX-L",
+        "msrp": "43000",
+        "dealer_price": "39950",
+        "stock_number": "H23006",
+        "vin": "1HGCM82633A000006",
+        "condition": "certified"
+      },
+      "offer": {
+        "effective_price": "39950",
+        "type": "cash"
+      }
+    },
+    "ad_copy": "2023 Honda Passport EX-L!\nYours for $39,950.\nStock #H23006.\nOffer expires June 15, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.",
+    "true_claims": {
+      "advertised_price": "39950",
+      "price_type": "unknown",
+      "apr": null,
+      "lease_monthly_payment": null,
+      "lease_term_months": null,
+      "finance_monthly_payment": null,
+      "finance_term_months": null,
+      "due_at_signing": null,
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-06-15",
+      "trim_claimed": "EX-L",
+      "stock_number_claimed": "H23006",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "REQUIRES_REVIEW",
+    "expected_blocker_rule_keys": [],
+    "notes": ""
+  },
+  {
+    "id": "passport-5-missing_ca_stock_number",
+    "scenario": "missing_ca_stock_number",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2023,
+        "make": "Honda",
+        "model": "Passport",
+        "trim": "EX-L",
+        "msrp": "43000",
+        "dealer_price": "39950",
+        "stock_number": "H23006",
+        "vin": "1HGCM82633A000006",
+        "condition": "certified"
+      },
+      "offer": {
+        "effective_price": "39950",
+        "type": "cash"
+      }
+    },
+    "ad_copy": "2023 Honda Passport EX-L!\nYours for $39,950.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.",
+    "true_claims": {
+      "advertised_price": "39950",
+      "price_type": "unknown",
+      "apr": null,
+      "lease_monthly_payment": null,
+      "lease_term_months": null,
+      "finance_monthly_payment": null,
+      "finance_term_months": null,
+      "due_at_signing": null,
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "EX-L",
+      "stock_number_claimed": null,
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "FAIL",
+    "expected_blocker_rule_keys": [
+      "CA_SPECIFIC_VEHICLE_IDENTIFIER_REQUIRED"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "odyssey-6-compliant",
+    "scenario": "compliant",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2022,
+        "make": "Honda",
+        "model": "Odyssey",
+        "trim": "EX",
+        "msrp": "38500",
+        "dealer_price": "33900",
+        "stock_number": "H22007",
+        "vin": "1HGCM82633A000007",
+        "condition": "used"
+      },
+      "offer": {
+        "effective_price": "33900",
+        "type": "rebate",
+        "down_payment": "2500"
+      }
+    },
+    "ad_copy": "2022 Honda Odyssey EX!\nYours for $33,900.\nStock #H22007.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.",
+    "true_claims": {
+      "advertised_price": "33900",
+      "price_type": "unknown",
+      "apr": null,
+      "lease_monthly_payment": null,
+      "lease_term_months": null,
+      "finance_monthly_payment": null,
+      "finance_term_months": null,
+      "due_at_signing": null,
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "EX",
+      "stock_number_claimed": "H22007",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "PASS",
+    "expected_blocker_rule_keys": [],
+    "notes": ""
+  },
+  {
+    "id": "odyssey-6-wrong_trim",
+    "scenario": "wrong_trim",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2022,
+        "make": "Honda",
+        "model": "Odyssey",
+        "trim": "EX",
+        "msrp": "38500",
+        "dealer_price": "33900",
+        "stock_number": "H22007",
+        "vin": "1HGCM82633A000007",
+        "condition": "used"
+      },
+      "offer": {
+        "effective_price": "33900",
+        "type": "rebate",
+        "down_payment": "2500"
+      }
+    },
+    "ad_copy": "2022 Honda Odyssey Touring!\nYours for $33,900.\nStock #H22007.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.",
+    "true_claims": {
+      "advertised_price": "33900",
+      "price_type": "unknown",
+      "apr": null,
+      "lease_monthly_payment": null,
+      "lease_term_months": null,
+      "finance_monthly_payment": null,
+      "finance_term_months": null,
+      "due_at_signing": null,
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "Touring",
+      "stock_number_claimed": "H22007",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "FAIL",
+    "expected_blocker_rule_keys": [
+      "ADVERTISED_TRIM_MATCHES_SOURCE"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "odyssey-6-wrong_price",
+    "scenario": "wrong_price",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2022,
+        "make": "Honda",
+        "model": "Odyssey",
+        "trim": "EX",
+        "msrp": "38500",
+        "dealer_price": "33900",
+        "stock_number": "H22007",
+        "vin": "1HGCM82633A000007",
+        "condition": "used"
+      },
+      "offer": {
+        "effective_price": "33900",
+        "type": "rebate",
+        "down_payment": "2500"
+      }
+    },
+    "ad_copy": "2022 Honda Odyssey EX!\nYours for $31,900.\nStock #H22007.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.",
+    "true_claims": {
+      "advertised_price": "31900",
+      "price_type": "unknown",
+      "apr": null,
+      "lease_monthly_payment": null,
+      "lease_term_months": null,
+      "finance_monthly_payment": null,
+      "finance_term_months": null,
+      "due_at_signing": null,
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "EX",
+      "stock_number_claimed": "H22007",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "FAIL",
+    "expected_blocker_rule_keys": [
+      "ADVERTISED_PRICE_MATCHES_SOURCE"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "odyssey-6-expired_offer",
+    "scenario": "expired_offer",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2022,
+        "make": "Honda",
+        "model": "Odyssey",
+        "trim": "EX",
+        "msrp": "38500",
+        "dealer_price": "33900",
+        "stock_number": "H22007",
+        "vin": "1HGCM82633A000007",
+        "condition": "used"
+      },
+      "offer": {
+        "effective_price": "33900",
+        "type": "rebate",
+        "down_payment": "2500"
+      }
+    },
+    "ad_copy": "2022 Honda Odyssey EX!\nYours for $33,900.\nStock #H22007.\nOffer expires June 15, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.",
+    "true_claims": {
+      "advertised_price": "33900",
+      "price_type": "unknown",
+      "apr": null,
+      "lease_monthly_payment": null,
+      "lease_term_months": null,
+      "finance_monthly_payment": null,
+      "finance_term_months": null,
+      "due_at_signing": null,
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-06-15",
+      "trim_claimed": "EX",
+      "stock_number_claimed": "H22007",
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "REQUIRES_REVIEW",
+    "expected_blocker_rule_keys": [],
+    "notes": ""
+  },
+  {
+    "id": "odyssey-6-missing_ca_stock_number",
+    "scenario": "missing_ca_stock_number",
+    "jurisdiction": "US-CA",
+    "source_facts": {
+      "vehicle": {
+        "year": 2022,
+        "make": "Honda",
+        "model": "Odyssey",
+        "trim": "EX",
+        "msrp": "38500",
+        "dealer_price": "33900",
+        "stock_number": "H22007",
+        "vin": "1HGCM82633A000007",
+        "condition": "used"
+      },
+      "offer": {
+        "effective_price": "33900",
+        "type": "rebate",
+        "down_payment": "2500"
+      }
+    },
+    "ad_copy": "2022 Honda Odyssey EX!\nYours for $33,900.\nOffer expires July 20, 2026.\nAdvertised price excludes government fees and taxes.\nSee dealer for details.",
+    "true_claims": {
+      "advertised_price": "33900",
+      "price_type": "unknown",
+      "apr": null,
+      "lease_monthly_payment": null,
+      "lease_term_months": null,
+      "finance_monthly_payment": null,
+      "finance_term_months": null,
+      "due_at_signing": null,
+      "down_payment": null,
+      "total_of_payments": null,
+      "expiration_date": "2026-07-20",
+      "trim_claimed": "EX",
+      "stock_number_claimed": null,
+      "vin_claimed": null,
+      "disclaimers": [
+        "Advertised price excludes government fees and taxes.",
+        "See dealer for details."
+      ],
+      "confidence_notes": null,
+      "extraction_confidence": 1.0
+    },
+    "expected_verdict": "FAIL",
+    "expected_blocker_rule_keys": [
+      "CA_SPECIFIC_VEHICLE_IDENTIFIER_REQUIRED"
+    ],
+    "notes": ""
+  }
+]
