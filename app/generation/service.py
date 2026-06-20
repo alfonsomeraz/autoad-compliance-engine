@@ -18,6 +18,7 @@ from app.generation.agent import Generator, llm_generator
 from app.llm.extraction import Extractor, llm_extractor
 from app.models.enums import AssetFormat, Channel, Verdict
 from app.models.tables import AdAsset, ComplianceRun, Offer, Vehicle
+from app.observability import get_logger
 from app.rules import engine
 from app.rules.schema import EvaluationResult
 from app.validation.orchestrator import (
@@ -25,6 +26,8 @@ from app.validation.orchestrator import (
     resolve_ruleset,
     violations_from,
 )
+
+_log = get_logger(__name__)
 
 
 class GenerationOutcome(BaseModel):
@@ -72,6 +75,13 @@ def generate_compliant_ad(
         result = engine.evaluate(
             ruleset.specs, extraction.claims, source, jurisdiction=jurisdiction
         )
+        _log.info(
+            "generation.attempt",
+            vehicle_id=vehicle_id,
+            attempt=attempts,
+            verdict=result.verdict.value,
+            violations=len(result.findings),
+        )
         if result.verdict is Verdict.PASS:
             break
         feedback = _feedback(result)
@@ -103,6 +113,13 @@ def generate_compliant_ad(
     db.commit()
     db.refresh(run)
 
+    _log.info(
+        "generation.completed",
+        run_id=run.id,
+        verdict=result.verdict.value,
+        attempts=attempts,
+        vehicle_id=vehicle_id,
+    )
     return GenerationOutcome(
         copy_text=generated.copy_text,
         verdict=result.verdict,

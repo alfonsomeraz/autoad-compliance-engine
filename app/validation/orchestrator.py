@@ -20,10 +20,13 @@ from app.llm.extraction import Extractor, llm_extractor
 from app.models.claims import AdClaims, SourceFacts
 from app.models.enums import AssetFormat, Channel
 from app.models.tables import AdAsset, ComplianceRun, Offer, Vehicle, Violation
+from app.observability import get_logger
 from app.rules import engine, sync
 from app.rules.catalog import load_catalog
 from app.rules.schema import Finding, RuleSpec
 from app.vision.extraction import VisionExtractor, llm_vision_extractor
+
+_log = get_logger(__name__)
 
 
 class ResolvedRuleset(NamedTuple):
@@ -213,4 +216,14 @@ def _evaluate_and_record(
     db.add(run)
     db.commit()
     db.refresh(run)
+
+    _log.info(
+        "compliance_run.recorded",
+        run_id=run.id,
+        verdict=run.status.value,
+        violations=len(run.violations),
+        ruleset_version_id=ruleset.ruleset_version_id,
+        asset_format=asset.format.value,
+        vehicle_id=asset.vehicle_id,
+    )
     return run
